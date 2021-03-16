@@ -1,0 +1,21 @@
+.container{
+    max-width: 1920px;
+    width: 100%;
+
+}
+
+.search {
+    margin: 64px auto 48px auto;
+    display: flex;
+}
+
+.item_grid {
+    justify-content: center;
+    display: grid;
+    grid-template-columns:repeat(3, 174px);
+    gap: 10px;
+}
+
+* {
+    box-sizing: border-box;
+}

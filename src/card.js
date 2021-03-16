@@ -1,20 +1,17 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import './card.scss'
 
 export default function Card({
     title = 'Unknown',
-    description = 'Unknown',
-    imageSrc ='https://via.placeholder.com/200x340',
-    links = 'Unknown',
+    imageSrc = 'https://via.placeholder.com/172x252',
     rating = 0,
 }) {
-
     return (
         <div className='card'>
-            <img src={imageSrc} />
-            <h1>{title}</h1>
-            <h2>{description}</h2>
-            <h3>{links}</h3>
-            <h4>{rating}</h4>
+            <img className='card__image' src={imageSrc} alt={title} />
+                <div className='card__content'>
+                    <h1 className='card__title'>{title}</h1>
+                </div>
         </div>
     );
 }
