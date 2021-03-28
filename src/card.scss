@@ -3,11 +3,14 @@
     width: 174px;
     display: flex;
     align-items: flex-end;
-    background: white;
+    background: none;
     position: relative;
     transition: 0.4s ease-out;
 	box-shadow: 0px 7px 10px rgba(black, 0.5);
-    &:hover {
+    &--filled {
+        @extend .card;
+    }
+    &--filled:hover {
         &::before {
 			opacity: 1
         }
@@ -16,7 +19,7 @@
             transform: translateY(0px);
         }
     }
-    &::before {
+    &--filled::before {
         content: "";
         position: absolute;
         top:0;
@@ -50,5 +53,6 @@
     .card__title {
         font-size: 1rem;
     }
+    
 }
 
