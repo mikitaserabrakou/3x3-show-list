@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import {useState } from 'react';
 import './card.scss';
 import './AddButton';
 import AddButton from './AddButton';
@@ -9,6 +9,7 @@ export default function Card({
     rating = 0,
     state = false,
     className = 'card',
+    handleOnClick,
 }) {
     const [isValue, setIsValue] = useState(state);
 
@@ -20,7 +21,7 @@ export default function Card({
                 <div className='card__content'>
                     <h1 className='card__title'>{title}</h1>
                 </div>
-            </>) : <AddButton/>}
+            </>) : <AddButton handleOnClick={handleOnClick}/>}
         </div>
     );
 }

@@ -1,5 +1,7 @@
+import {useState} from 'react'
 import './App.scss';
 import Card from './card';
+import Popup from './popup';
 import SearchBox from './search_box';
 
 const cards = [
@@ -15,13 +17,20 @@ const cards = [
 
 function App() {
 
+  const [isPopup, setIsPopup] = useState(false);
+
+  const togglePopup = () => {
+      setIsPopup(!isPopup);
+  }
+
   const cards_item = cards.map((card, index) =>
     <Card {...card} key={index} />
   );
-  cards_item.push(<Card key={8}/>)
+  cards_item.push(<Card key={8} handleOnClick={togglePopup}/>)
 
   return (
     <div className="container">
+      {isPopup && <Popup handleClose={togglePopup}/>}
       <SearchBox />
       <div className="item_grid">
         {cards_item}

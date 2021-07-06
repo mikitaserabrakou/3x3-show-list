@@ -1,0 +1,13 @@
+.popup {
+    position: fixed;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.466);
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close {
+    position: relative;
+}
