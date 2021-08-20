@@ -3,19 +3,10 @@ import './card.scss'
 import './AddButton'
 import AddButton from './AddButton'
 
-export default function Card({
-  title = 'Unknown',
-  imageSrc = '',
-  rating = 0,
-  state = false,
-  className = 'card',
-  handleOnClick
-}) {
-  const [isValue, setIsValue] = useState(state)
-
+export default function Card({ title, imageSrc, rating, state, className }) {
   return (
     <div className={className}>
-      {isValue ? (
+      {state ? (
         <>
           <img className="card__image" src={imageSrc} alt={title} />
           <div className="card__content">
@@ -23,7 +14,7 @@ export default function Card({
           </div>
         </>
       ) : (
-        <AddButton handleOnClick={handleOnClick} />
+        <AddButton />
       )}
     </div>
   )

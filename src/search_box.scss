@@ -21,30 +21,3 @@
         box-shadow: 0.2rem 0.8rem 1.6rem #1a1d29;
     }
 }
-
-.results {
-    position: absolute;
-    top: 96px;
-    width: 542px;
-    list-style-type: none;
-    margin-left: 0;
-    padding: 0;
-    background: #1a1d29;
-    border-radius: 0.4rem;
-    z-index: 10;
-    box-shadow: 0.2rem 0.8rem 1.6rem #1a1d29;
-
-    img {
-        max-height: 72px;
-    }
-}
-
-.results li {
-    border-bottom: rgba(128, 128, 128, 0.281) solid 1px;
-    color: white;
-    padding: 12px;
-    font-size: 18px;
-}
-.results li:last-child {
-    border-bottom: none;
-}

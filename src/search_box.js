@@ -3,8 +3,8 @@ import './search_box.scss'
 import axios from 'axios'
 import SearchResults from './SearchResults'
 
-export default function SearchBox() {
-  const [shows, setShows] = useState([])
+export default function SearchBox({ onAddShow }) {
+  const [results, setResulst] = useState([])
   const [isLoaded, setIsLoadead] = useState(false)
   // const [error, setError] = useState(null)
 
@@ -14,8 +14,8 @@ export default function SearchBox() {
       .get(`http://api.tvmaze.com/search/shows?q=${e.target.value}`)
       .then(res => {
         if (res.data.length > 0) {
-          setShows(res.data)
-          console.log(res.data)
+          setResulst(res.data)
+          // console.log(res.data)
           setIsLoadead(true)
         } else setIsLoadead(false)
       })
@@ -34,12 +34,13 @@ export default function SearchBox() {
       />
       {isLoaded ? (
         <ul className="results">
-          {shows.map((item, index) => (
+          {results.map((item, index) => (
             <li key={index}>
               <SearchResults
                 title={item.show.name}
                 imageSrc={item.show.image == null ? '' : item.show.image.medium}
                 year={item.show.premiered == null ? '' : item.show.premiered}
+                onAddShow={onAddShow}
               />
             </li>
           ))}
