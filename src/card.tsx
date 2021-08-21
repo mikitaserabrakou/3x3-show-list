@@ -3,7 +3,15 @@ import './card.scss'
 import './AddButton'
 import AddButton from './AddButton'
 
-export default function Card({ title, imageSrc, rating, state, className }) {
+type TProps = {
+  title: string
+  imageSrc: string
+  rating: number
+  state: boolean
+  className: string
+}
+
+export default function Card({ title, imageSrc, rating, state, className }: TProps) {
   return (
     <div className={className}>
       {state ? (

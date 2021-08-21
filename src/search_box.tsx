@@ -1,17 +1,21 @@
-import { useState } from 'react'
+import * as React from 'react'
 import './search_box.scss'
 import axios from 'axios'
 import SearchResults from './SearchResults'
 
-export default function SearchBox({ onAddShow }) {
-  const [results, setResulst] = useState([])
-  const [isLoaded, setIsLoadead] = useState(false)
+type TProps = {
+  onAddShow: (title: string, imageSrc: any) => void
+}
+
+export default function SearchBox({ onAddShow }: TProps) {
+  const [results, setResulst] = React.useState([])
+  const [isLoaded, setIsLoadead] = React.useState(false)
   // const [error, setError] = useState(null)
 
-  const fetchData = e => {
+  const fetchData = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setIsLoadead(false)
     axios
-      .get(`http://api.tvmaze.com/search/shows?q=${e.target.value}`)
+      .get(`http://api.tvmaze.com/search/shows?q=${e.currentTarget.value}`)
       .then(res => {
         if (res.data.length > 0) {
           setResulst(res.data)
@@ -34,7 +38,7 @@ export default function SearchBox({ onAddShow }) {
       />
       {isLoaded ? (
         <ul className="results">
-          {results.map((item, index) => (
+          {results.map((item: any, index) => (
             <li key={index}>
               <SearchResults
                 title={item.show.name}

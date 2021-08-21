@@ -69,6 +69,25 @@ import SearchBox from './search_box'
 //   }
 // ]
 
+type TProps = {
+  title: string
+  imageSrc: any
+  year: string
+  onAddShow: (title: string, imageSrc: string) => void
+}
+
+type TCard = {
+  title: string
+  imageSrc: any
+  rating?: number
+  state: boolean
+  classname: string
+}
+
+type TCards = {
+  card: TCard[]
+}
+
 function App() {
   const [shows, setShows] = useState([
     ...Array(9).fill({
@@ -80,15 +99,15 @@ function App() {
     })
   ])
 
-  const onAddShow = show => {
-    const findElement = element => element.state === false
+  const onAddShow = (title: string, imageSrc: any) => {
+    const findElement = (element: TCard) => element.state === false
     const index = shows.findIndex(findElement)
     if (index !== -1) {
       const newShows = [
         ...shows.slice(0, index),
         {
-          title: show.title,
-          imageSrc: show.imageSrc,
+          title: title,
+          imageSrc: imageSrc,
           rating: 0,
           state: true,
           className: 'card--filled'
