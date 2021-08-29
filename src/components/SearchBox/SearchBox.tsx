@@ -1,10 +1,10 @@
 import * as React from 'react'
-import './search_box.scss'
+import './SearchBox.scss'
 import axios from 'axios'
-import SearchResults from './SearchResults'
+import SearchResults from '../SearchResults/SearchResults'
 
 type TProps = {
-  onAddShow: (title: string, imageSrc: any) => void
+  onAddShow: (id: number, title: string, imageSrc: any) => void
 }
 
 export default function SearchBox({ onAddShow }: TProps) {
@@ -19,7 +19,7 @@ export default function SearchBox({ onAddShow }: TProps) {
       .then(res => {
         if (res.data.length > 0) {
           setResulst(res.data)
-          // console.log(res.data)
+          console.log(res.data)
           setIsLoadead(true)
         } else setIsLoadead(false)
       })
@@ -41,6 +41,7 @@ export default function SearchBox({ onAddShow }: TProps) {
           {results.map((item: any, index) => (
             <li key={index}>
               <SearchResults
+                id={item.show.id}
                 title={item.show.name}
                 imageSrc={item.show.image == null ? '' : item.show.image.medium}
                 year={item.show.premiered == null ? '' : item.show.premiered}

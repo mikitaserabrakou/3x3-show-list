@@ -1,16 +1,23 @@
-import AddButton from './AddButton'
+import Button from '../buttons/Button/Button'
 import './SearchResults.scss'
 
 type TProps = {
+  id: number
   title: string
   imageSrc: any
   year: string
-  onAddShow: (title: string, imageSrc: string) => void
+  onAddShow: (id: number, title: string, imageSrc: string) => void
 }
 
-export default function SearchResults({ title, imageSrc, year, onAddShow }: TProps): JSX.Element {
+export default function SearchResults({
+  id,
+  title,
+  imageSrc,
+  year,
+  onAddShow
+}: TProps): JSX.Element {
   const handleClick = () => {
-    onAddShow(title, imageSrc)
+    onAddShow(id, title, imageSrc)
   }
   return (
     <>
@@ -20,9 +27,8 @@ export default function SearchResults({ title, imageSrc, year, onAddShow }: TPro
         <p className="results__year">{year.split('-')[0]}</p>
       </div>
       <div className="results__buttons">
-        <button onClick={handleClick}>Add</button>
+        <Button style="add" handleClick={handleClick}></Button>
       </div>
-      {/* <AddButton handleClick={handleClick} /> */}
     </>
   )
 }

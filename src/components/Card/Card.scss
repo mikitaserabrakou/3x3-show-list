@@ -2,7 +2,8 @@
     height: 252px;
     width: 174px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     background: none;
     position: relative;
     transition: 0.4s ease-out;
@@ -41,7 +42,10 @@
         object-fit: cover;
     }
     .card__content {
-        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 48px;
         position: relative;
         color: white;
         z-index: 3;
@@ -51,8 +55,9 @@
         text-align: center;
     }
     .card__title {
+        padding: 0px 12px 0px 12px;
         font-size: 1rem;
     }
-    
+
 }
 
