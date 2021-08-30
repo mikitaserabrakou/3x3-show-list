@@ -1,15 +1,14 @@
-import { Children } from 'react'
 import './Button.scss'
 
 type TProps = {
-  style: string
+  type: string
   handleClick: () => void
   children?: React.ReactNode
 }
 
-export default function Button({ handleClick, style, children }: TProps): JSX.Element {
+export default function Button({ handleClick, type, children }: TProps): JSX.Element {
   return (
-    <button className={'btn--' + style} onClick={handleClick}>
+    <button className={'btn--' + type} onClick={handleClick}>
       {children}
     </button>
   )

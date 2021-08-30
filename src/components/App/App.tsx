@@ -33,8 +33,8 @@ function App(): JSX.Element {
   ])
 
   const onAddShow = (id: number, title: string, imageSrc: any) => {
-    const checkShow = (element: TCard) => element.id == id
-    if (shows.findIndex(checkShow) == -1) {
+    const checkShow = (element: TCard) => element.id === id
+    if (shows.findIndex(checkShow) === -1) {
       const findElement = (element: TCard) => element.state === false
       const index = shows.findIndex(findElement)
       if (index !== -1) {

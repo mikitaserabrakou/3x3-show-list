@@ -21,13 +21,13 @@ export default function SearchResults({
   }
   return (
     <>
-      <img src={imageSrc}></img>
+      <img src={imageSrc} alt=""></img>
       <div className="results__info">
         <p className="results__title">{title}</p>
         <p className="results__year">{year.split('-')[0]}</p>
       </div>
       <div className="results__buttons">
-        <Button style="add" handleClick={handleClick}></Button>
+        <Button type="add" handleClick={handleClick}></Button>
       </div>
     </>
   )
