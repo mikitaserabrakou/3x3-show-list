@@ -1,3 +1,4 @@
+import React from 'react'
 import './Card.scss'
 import Button from '../buttons/Button/Button'
 

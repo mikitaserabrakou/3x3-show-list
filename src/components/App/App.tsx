@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './App.scss'
 import Card from '../Card/Card'
 import SearchBox from '../SearchBox/SearchBox'
@@ -41,9 +41,9 @@ function App(): JSX.Element {
         const newShows = [
           ...shows.slice(0, index),
           {
-            id: id,
-            title: title,
-            imageSrc: imageSrc,
+            id,
+            title,
+            imageSrc,
             rating: 0,
             state: true,
             className: 'card--filled'
@@ -72,14 +72,14 @@ function App(): JSX.Element {
     ])
   }
 
-  const cards_item = shows.map((card, index) => (
+  const cardsItem = shows.map((card, index) => (
     <Card {...card} key={card.id || index} onRemoveShow={onRemoveShow} />
   ))
 
   return (
     <div className="container">
       <SearchBox onAddShow={onAddShow} />
-      <div className="item_grid">{cards_item}</div>
+      <div className="item_grid">{cardsItem}</div>
     </div>
   )
 }
