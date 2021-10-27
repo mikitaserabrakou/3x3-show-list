@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import Button from '../buttons/Button/Button'
 import './SearchResults.scss'
 
@@ -17,7 +17,8 @@ export default function SearchResults({
   year,
   onAddShow
 }: TProps): JSX.Element {
-  const handleClick = () => {
+  const handleClick = (event: SyntheticEvent) => {
+    event.preventDefault()
     onAddShow(id, title, imageSrc)
   }
   return (
