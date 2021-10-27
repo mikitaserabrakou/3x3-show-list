@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, SyntheticEvent } from 'react'
 import './SearchBox.scss'
 import axios from 'axios'
 import SearchResults from '../SearchResults/SearchResults'
@@ -24,6 +24,10 @@ export default function SearchBox({ onAddShow }: TProps) {
   const [isLoaded, setIsLoadead] = useState(false)
   // const [error, setError] = useState(null)
 
+  const handleMouseDown = (event: SyntheticEvent) => {
+    event.preventDefault()
+  }
+
   const [isFocused, setIsFocused] = useToggle(false)
 
   const fetchData = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -48,15 +52,14 @@ export default function SearchBox({ onAddShow }: TProps) {
         type="text"
         className="search_bar"
         onChange={fetchData}
-        // onFocus={setIsFocused}
-        // onBlur={setIsFocused}
+        onFocus={setIsFocused}
+        onBlur={setIsFocused}
         placeholder="Movie/show/anime name, e.g. Attack on Titan"
       />
-      {/* {&& isFocused} */}
-      {isLoaded ? (
-        <ul className="results">
+      {isLoaded && isFocused ? (
+        <ul className="results" onFocus={setIsFocused} onBlur={setIsFocused}>
           {results.map((item: any, index) => (
-            <li key={item.show.id}>
+            <li key={item.show.id} onMouseDown={handleMouseDown}>
               <SearchResults
                 id={item.show.id}
                 title={item.show.name}
