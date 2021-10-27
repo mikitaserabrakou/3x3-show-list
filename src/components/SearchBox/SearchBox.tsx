@@ -7,24 +7,10 @@ type TProps = {
   onAddShow: (id: number, title: string, imageSrc: any) => void
 }
 
-const useToggle = (initialState = false): [boolean, any] => {
-  // Initialize the state
-  const [state, setState] = useState<boolean>(initialState)
-
-  // Define and memorize toggler function in case we pass down the comopnent,
-  // This function change the boolean value to it's opposite value
-  // eslint-disable-next-line
-  const toggle = useCallback((): void => setState(state => !state), [])
-
-  return [state, toggle]
-}
-
 export default function SearchBox({ onAddShow }: TProps) {
   const [results, setResulst] = useState([])
   const [isLoaded, setIsLoadead] = useState(false)
   // const [error, setError] = useState(null)
-
-  const [isFocused, setIsFocused] = useToggle(false)
 
   const fetchData = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setIsLoadead(false)
@@ -48,11 +34,8 @@ export default function SearchBox({ onAddShow }: TProps) {
         type="text"
         className="search_bar"
         onChange={fetchData}
-        // onFocus={setIsFocused}
-        // onBlur={setIsFocused}
         placeholder="Movie/show/anime name, e.g. Attack on Titan"
       />
-      {/* {&& isFocused} */}
       {isLoaded ? (
         <ul className="results">
           {results.map((item: any, index) => (
