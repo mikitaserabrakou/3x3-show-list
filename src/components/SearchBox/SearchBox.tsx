@@ -56,7 +56,6 @@ export default function SearchBox({ onAddShow }: TProps) {
         onBlur={setIsFocused}
         placeholder="Movie/show/anime name, e.g. Attack on Titan"
       />
-      {/* {&& isFocused} */}
       {isLoaded && isFocused ? (
         <ul className="results" onFocus={setIsFocused} onBlur={setIsFocused}>
           {results.map((item: any, index) => (
