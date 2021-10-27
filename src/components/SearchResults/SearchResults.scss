@@ -1,47 +1,51 @@
 .results {
-    position: absolute;
-    top: 96px;
-    width: 542px;
-    list-style-type: none;
-    margin-left: 0;
-    padding: 0;
-    background: #1a1d29;
-    border-radius: 0.4rem;
-    z-index: 10;
-    box-shadow: 0.2rem 0.8rem 1.6rem #1a1d29;
+  position: absolute;
+  top: 96px;
+  width: 542px;
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+  background: #1a1d29;
+  border-radius: 0.4rem;
+  z-index: 10;
+  box-shadow: 0.2rem 0.8rem 1.6rem #1a1d29;
 
-    img {
-        max-height: 72px;
-    }
+  img {
+    max-height: 72px;
+  }
 
-    li {
-        display: flex;
-        border-bottom: rgba(128, 128, 128, 0.281) solid 1px;
-        color: white;
-        padding: 8px;
-        font-size: 18px;
-        align-items: center;
-    }
+  li {
+    display: flex;
+    border-bottom: rgba(128, 128, 128, 0.281) solid 1px;
+    color: white;
+    padding: 8px;
+    font-size: 18px;
+    align-items: center;
+  }
 
-    .results__info {
-        padding-left: 12px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin: 0px;
-        flex-grow: 2;
-    }
-    
-    .results__title {
-        margin: 0px;
-    }
+  .results__info {
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 0px;
+    flex-grow: 2;
+  }
 
-    .results__year {
-        margin: 0px;
-    }
+  .results__title {
+    margin: 0px;
+  }
 
-    li:last-child {
-        border-bottom: none;
-    }
+  .results__year {
+    margin: 0px;
+  }
+
+  li:last-child {
+    border-bottom: none;
+  }
+  .btn--add {
+    cursor: pointer;
+    color: #ffffff;
+  }
 }

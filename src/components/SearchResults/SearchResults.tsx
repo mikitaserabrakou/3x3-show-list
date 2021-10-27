@@ -28,7 +28,9 @@ export default function SearchResults({
         <p className="results__year">{year.split('-')[0]}</p>
       </div>
       <div className="results__buttons">
-        <Button type="add" handleClick={handleClick} />
+        <Button type="add" handleClick={handleClick}>
+          Add
+        </Button>
       </div>
     </>
   )
