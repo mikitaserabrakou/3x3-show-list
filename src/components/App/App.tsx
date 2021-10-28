@@ -32,10 +32,15 @@ function App(): JSX.Element {
     })
   ])
 
+  // TODO make a common method for search through objects of array
   const onAddShow = (id: number, title: string, imageSrc: any) => {
+    const findElement = (element: TCard) => element.state === false
     const checkShow = (element: TCard) => element.id === id
-    if (shows.findIndex(checkShow) === -1) {
-      const findElement = (element: TCard) => element.state === false
+    if (shows.findIndex(findElement) === -1) {
+      alert('You have already filled all available slots')
+    } else if (shows.findIndex(checkShow) !== -1) {
+      alert('This show is already added.')
+    } else {
       const index = shows.findIndex(findElement)
       if (index !== -1) {
         const newShows = [
@@ -52,8 +57,6 @@ function App(): JSX.Element {
         ]
         setShows(newShows)
       }
-    } else {
-      alert('This show is already added.')
     }
   }
 
