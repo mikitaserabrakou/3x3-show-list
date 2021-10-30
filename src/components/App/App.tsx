@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import './App.scss'
+
+import { DndContext, useDroppable } from '@dnd-kit/core'
+
 import Card from '../Card/Card'
 import SearchBox from '../SearchBox/SearchBox'
 
@@ -31,6 +34,9 @@ function App(): JSX.Element {
       className: 'card'
     })
   ])
+
+  // dnd
+  const { setNodeRef } = useDroppable({ id: 'droppableGrid' })
 
   // TODO make a common method for search through objects of array
   const onAddShow = (id: number, title: string, imageSrc: any) => {
@@ -76,13 +82,17 @@ function App(): JSX.Element {
   }
 
   const cardsItem = shows.map((card, index) => (
-    <Card {...card} key={card.id || index} onRemoveShow={onRemoveShow} />
+    <Card {...card} id={card.id || index} key={card.id || index} onRemoveShow={onRemoveShow} />
   ))
 
   return (
-    <div className="container">
+    <div className="container" ref={setNodeRef}>
       <SearchBox onAddShow={onAddShow} />
-      <div className="item_grid">{cardsItem}</div>
+      <DndContext>
+        <div className="item_grid" ref={setNodeRef}>
+          {cardsItem}
+        </div>
+      </DndContext>
     </div>
   )
 }
