@@ -1,7 +1,16 @@
 import React, { useState } from 'react'
 import './App.scss'
 
-import { DndContext, useDroppable } from '@dnd-kit/core'
+import {
+  DndContext,
+  useDroppable,
+  closestCenter,
+  MouseSensor,
+  useSensor,
+  useSensors,
+  TouchSensor
+} from '@dnd-kit/core'
+import { rectSortingStrategy, SortableContext, arrayMove } from '@dnd-kit/sortable'
 
 import Card from '../Card/Card'
 import SearchBox from '../SearchBox/SearchBox'
@@ -36,7 +45,9 @@ function App(): JSX.Element {
   ])
 
   // dnd
-  const { setNodeRef } = useDroppable({ id: 'droppableGrid' })
+  // const { setNodeRef } = useDroppable({ id: 'droppableGrid' })
+  const [activeId, setActiveId] = useState(null)
+  const sensor = useSensors(useSensor(MouseSensor), useSensor(TouchSensor))
 
   // TODO make a common method for search through objects of array
   const onAddShow = (id: number, title: string, imageSrc: any) => {
@@ -81,17 +92,44 @@ function App(): JSX.Element {
     ])
   }
 
+  const handleDragStart = (event: any) => {
+    setActiveId(event.active.id)
+  }
+
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event
+    if (active.id !== over.id) {
+      setShows(() => {
+        const oldIndex = shows.indexOf(active.id)
+        const newIndex = shows.indexOf(over.id)
+
+        return arrayMove(shows, oldIndex, newIndex)
+      })
+      setActiveId(null)
+    }
+  }
+
+  const handleDragCancel = () => {
+    setActiveId(null)
+  }
+
   const cardsItem = shows.map((card, index) => (
     <Card {...card} id={card.id || index} key={card.id || index} onRemoveShow={onRemoveShow} />
   ))
 
   return (
-    <div className="container" ref={setNodeRef}>
+    <div className="container">
       <SearchBox onAddShow={onAddShow} />
-      <DndContext>
-        <div className="item_grid" ref={setNodeRef}>
-          {cardsItem}
-        </div>
+      <DndContext
+        sensors={sensor}
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        onDragCancel={handleDragCancel}
+      >
+        <SortableContext items={shows} strategy={rectSortingStrategy}>
+          <div className="item_grid">{cardsItem}</div>
+        </SortableContext>
       </DndContext>
     </div>
   )
