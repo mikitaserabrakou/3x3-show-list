@@ -4,7 +4,7 @@ import axios from 'axios'
 import SearchResults from '../SearchResults/SearchResults'
 
 type TProps = {
-  onAddShow: (id: number, title: string, imageSrc: any) => void
+  onAddShow: (id: string, title: string, imageSrc: any) => void
 }
 
 const useToggle = (initialState = false): [boolean, any] => {

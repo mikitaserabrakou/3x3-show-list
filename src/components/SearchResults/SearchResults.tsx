@@ -3,11 +3,11 @@ import Button from '../buttons/Button/Button'
 import './SearchResults.scss'
 
 type TProps = {
-  id: number
+  id: string
   title: string
   imageSrc: any
   year: string
-  onAddShow: (id: number, title: string, imageSrc: string) => void
+  onAddShow: (id: string, title: string, imageSrc: string) => void
 }
 
 export default function SearchResults({
@@ -19,7 +19,7 @@ export default function SearchResults({
 }: TProps): JSX.Element {
   const handleClick = (event: SyntheticEvent) => {
     event.preventDefault()
-    onAddShow(id, title, imageSrc)
+    onAddShow(id.toString(), title, imageSrc)
   }
   return (
     <>

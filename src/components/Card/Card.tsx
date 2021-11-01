@@ -7,13 +7,13 @@ import './Card.scss'
 import Button from '../buttons/Button/Button'
 
 type TProps = {
-  id: number
+  id: string
   title: string
   imageSrc: string
   rating: number
   state: boolean
   className: string
-  onRemoveShow: (id: number) => void
+  onRemoveShow: (id: string) => void
 }
 
 export default function Card({
@@ -35,13 +35,23 @@ export default function Card({
     onRemoveShow(id)
   }
 
+  // const style = {
+  //   '--translate-x': transform ? transform.x : 0,
+  //   '--translate-y': transform ? transform.y : 0,
+  //   '--transition': transition
+  // }
+
+  // const style = transform
+  //   ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` }
+  //   : undefined
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition
   }
 
   return (
-    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <div className={className}>
         {state ? (
           <>
