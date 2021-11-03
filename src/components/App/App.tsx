@@ -34,17 +34,6 @@ type TCard = {
   className: string
   index: number
 }
-// const arr = new Array(9)
-// for (let i = 0; i < arr.length; i += 1) {
-//   arr[i] = {
-//     id: i.toString(),
-//     title: '',
-//     imageSrc: '',
-//     rating: 0,
-//     state: false,
-//     className: 'card'
-//   }
-// }
 function App(): JSX.Element {
   const arr = Array(9).fill({
     id: null,
@@ -77,18 +66,6 @@ function App(): JSX.Element {
       const index = shows.findIndex(findElement)
       console.log(index)
       if (index !== -1) {
-        // const newShows = [
-        //   ...shows.slice(0, index),
-        //   {
-        //     id: id.toString(),
-        //     title,
-        //     imageSrc,
-        //     rating: 0,
-        //     state: true,
-        //     className: 'card--filled'
-        //   },
-        //   ...shows.slice(index, -1)
-        // ]
         const newShows: any = shows.map((show, showIndex) => {
           if (showIndex === index)
             return { ...show, id, title, imageSrc, state: true, className: 'card--filled' }
