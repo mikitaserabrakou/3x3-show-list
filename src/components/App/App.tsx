@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import './App.scss'
 
 import {
@@ -14,6 +14,7 @@ import {
 } from '@dnd-kit/core'
 import { rectSortingStrategy, SortableContext, arrayMove } from '@dnd-kit/sortable'
 import { restrictToParentElement } from '@dnd-kit/modifiers'
+import { toPng } from 'html-to-image'
 
 import Card from '../Card/Card'
 import SearchBox from '../SearchBox/SearchBox'
@@ -50,6 +51,24 @@ function App(): JSX.Element {
     return { ...item, id: newID, listIndex: newID }
   })
   const [shows, setShows] = useState(newArr)
+
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onButtonClick = useCallback(() => {
+    if (ref.current === null) {
+      return
+    }
+    toPng(ref.current, { cacheBust: true, backgroundColor: '#292d3e' })
+      .then(dataUrl => {
+        const link = document.createElement('a')
+        link.download = 'my-image-name.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [ref])
 
   // dnd
   const sensor = useSensors(useSensor(PointerSensor), useSensor(KeyboardSensor))
@@ -123,9 +142,15 @@ function App(): JSX.Element {
         modifiers={[restrictToParentElement]}
       >
         <SortableContext items={shows} strategy={rectSortingStrategy}>
-          <div className="item_grid">{cardsItem}</div>
+          <div className="item_grid" ref={ref}>
+            {cardsItem}
+          </div>
         </SortableContext>
       </DndContext>
+      <button type="button" onClick={onButtonClick}>
+        {' '}
+        Click me
+      </button>
     </div>
   )
 }
