@@ -13,6 +13,7 @@ import {
   KeyboardSensor
 } from '@dnd-kit/core'
 import { rectSortingStrategy, SortableContext, arrayMove } from '@dnd-kit/sortable'
+import { restrictToParentElement } from '@dnd-kit/modifiers'
 
 import Card from '../Card/Card'
 import SearchBox from '../SearchBox/SearchBox'
@@ -115,7 +116,12 @@ function App(): JSX.Element {
   return (
     <div className="container">
       <SearchBox onAddShow={onAddShow} />
-      <DndContext sensors={sensor} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <DndContext
+        sensors={sensor}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+        modifiers={[restrictToParentElement]}
+      >
         <SortableContext items={shows} strategy={rectSortingStrategy}>
           <div className="item_grid">{cardsItem}</div>
         </SortableContext>
