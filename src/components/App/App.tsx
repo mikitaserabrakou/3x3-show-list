@@ -18,6 +18,7 @@ import { toPng } from 'html-to-image'
 
 import Card from '../Card/Card'
 import SearchBox from '../SearchBox/SearchBox'
+import Modal from '../Modal/Modal'
 
 type TProps = {
   title: string
@@ -51,23 +52,21 @@ function App(): JSX.Element {
     return { ...item, id: newID, listIndex: newID }
   })
   const [shows, setShows] = useState(newArr)
-
+  const [showModal, setShowModal] = useState(false)
+  const [image, setImage] = useState('')
   const ref = useRef<HTMLDivElement>(null)
 
-  const onButtonClick = useCallback(() => {
+  const onButtonClick = useCallback(async () => {
     if (ref.current === null) {
       return
     }
-    toPng(ref.current, { cacheBust: true, backgroundColor: '#292d3e' })
-      .then(dataUrl => {
-        const link = document.createElement('a')
-        link.download = 'my-image-name.png'
-        link.href = dataUrl
-        link.click()
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    const tempImage = await toPng(ref.current, {
+      cacheBust: true,
+      backgroundColor: '#292d3e',
+      width: 600
+    })
+    setImage(tempImage)
+    setShowModal(true)
   }, [ref])
 
   // dnd
@@ -113,6 +112,10 @@ function App(): JSX.Element {
     setShows(newShows)
   }
 
+  const onModalClose = () => {
+    setShowModal(false)
+  }
+
   const handleDragEnd = (event: any) => {
     const { active, over } = event
     if (active.id !== over.id) {
@@ -148,9 +151,9 @@ function App(): JSX.Element {
         </SortableContext>
       </DndContext>
       <button type="button" onClick={onButtonClick}>
-        {' '}
-        Click me
+        Click
       </button>
+      <Modal show={showModal} onClose={onModalClose} image={image} onClick={onButtonClick} />
     </div>
   )
 }
