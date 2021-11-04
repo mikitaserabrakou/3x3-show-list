@@ -1,9 +1,8 @@
-import React from 'react'
+import { cleanup } from '@testing-library/react'
+import React, { useEffect } from 'react'
 import './Modal.scss'
 
 export default function Modal({ show, image, onClose, onClick }: any) {
-  if (!show) return null
-
   const onClickSave = () => {
     const link = document.createElement('a')
     link.download = '3x3-show-list.png'
@@ -11,6 +10,19 @@ export default function Modal({ show, image, onClose, onClick }: any) {
     link.click()
   }
 
+  const closeOnEscapeKeyDown = (e: any) => {
+    if ((e.charCode || e.keyCode) === 27) {
+      onClose()
+    }
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('keydown', closeOnEscapeKeyDown)
+    return () => {
+      document.body.removeEventListener('keydown', closeOnEscapeKeyDown)
+    }
+  })
+  if (!show) return null
   return (
     <div className="modal">
       <div className="modal_content">
@@ -20,7 +32,7 @@ export default function Modal({ show, image, onClose, onClick }: any) {
         <div className="modal_body">
           <img src={image} alt="" />
         </div>
-        <div className="modal_footer>">
+        <div className="modal_footer">
           <button type="button" onClick={onClose}>
             Cancel
           </button>
