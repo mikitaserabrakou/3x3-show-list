@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './Modal.scss'
 
-export default function Modal({ show, image, handleClose: onClose, onCreateImage }: any) {
-  const [color, setColor] = useState('#000000')
+import { HexColorPicker } from 'react-colorful'
+import useDebouncy from 'use-debouncy/lib/fn'
+
+export default function Modal({ show, image, onClose, onCreateImage }: any) {
+  const [color, setColor] = useState('')
 
   const handleClickSave = () => {
     const link = document.createElement('a')
@@ -17,10 +20,10 @@ export default function Modal({ show, image, handleClose: onClose, onCreateImage
     }
   }
 
-  const handleColorChange = (e: any) => {
-    setColor(e.target.value)
-    onCreateImage(e.target.value)
-  }
+  const handleChange = useDebouncy(newValue => {
+    setColor(newValue)
+    onCreateImage(newValue)
+  }, 200)
 
   useEffect(() => {
     document.body.addEventListener('keydown', handleCloseOnEscapeKeyDown)
@@ -28,7 +31,9 @@ export default function Modal({ show, image, handleClose: onClose, onCreateImage
       document.body.removeEventListener('keydown', handleCloseOnEscapeKeyDown)
     }
   })
+
   if (!show) return null
+
   return (
     <div className="modal">
       <div className="modal_content">
@@ -37,7 +42,7 @@ export default function Modal({ show, image, handleClose: onClose, onCreateImage
         </div>
         <div className="modal_body">
           <img src={image} alt="" />
-          <input type="color" onChange={handleColorChange} value={color} />
+          <HexColorPicker color={color} onChange={handleChange} />
         </div>
         <div className="modal_footer">
           <button type="button" onClick={onClose}>

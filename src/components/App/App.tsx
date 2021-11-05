@@ -57,13 +57,13 @@ function App(): JSX.Element {
   const ref = useRef<HTMLDivElement>(null)
 
   const handleCreateImage = useCallback(
-    async (bgColor?: string) => {
+    async (color?) => {
       if (ref.current === null) {
         return
       }
       const tempImage = await toPng(ref.current, {
         cacheBust: true,
-        backgroundColor: bgColor || '#292d3e',
+        backgroundColor: color || '#292d3e',
         width: 600
       })
       setImage(tempImage)
