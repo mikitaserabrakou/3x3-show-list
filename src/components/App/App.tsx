@@ -56,18 +56,25 @@ function App(): JSX.Element {
   const [image, setImage] = useState('')
   const ref = useRef<HTMLDivElement>(null)
 
-  const onButtonClick = useCallback(async () => {
-    if (ref.current === null) {
-      return
-    }
-    const tempImage = await toPng(ref.current, {
-      cacheBust: true,
-      backgroundColor: '#292d3e',
-      width: 600
-    })
-    setImage(tempImage)
+  const handleCreateImage = useCallback(
+    async (bgColor?: string) => {
+      if (ref.current === null) {
+        return
+      }
+      const tempImage = await toPng(ref.current, {
+        cacheBust: true,
+        backgroundColor: bgColor || '#292d3e',
+        width: 600
+      })
+      setImage(tempImage)
+    },
+    [ref]
+  )
+
+  const handleOpenModal = () => {
+    handleCreateImage()
     setShowModal(true)
-  }, [ref])
+  }
 
   // dnd
   const sensor = useSensors(useSensor(PointerSensor), useSensor(KeyboardSensor))
@@ -150,10 +157,15 @@ function App(): JSX.Element {
           </div>
         </SortableContext>
       </DndContext>
-      <button type="button" onClick={onButtonClick}>
+      <button type="button" onClick={handleOpenModal}>
         Click
       </button>
-      <Modal show={showModal} onClose={onModalClose} image={image} onClick={onButtonClick} />
+      <Modal
+        show={showModal}
+        onClose={onModalClose}
+        image={image}
+        onCreateImage={handleCreateImage}
+      />
     </div>
   )
 }

@@ -1,25 +1,31 @@
-import { cleanup } from '@testing-library/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Modal.scss'
 
-export default function Modal({ show, image, onClose, onClick }: any) {
-  const onClickSave = () => {
+export default function Modal({ show, image, handleClose: onClose, onCreateImage }: any) {
+  const [color, setColor] = useState('#000000')
+
+  const handleClickSave = () => {
     const link = document.createElement('a')
     link.download = '3x3-show-list.png'
     link.href = image
     link.click()
   }
 
-  const closeOnEscapeKeyDown = (e: any) => {
+  const handleCloseOnEscapeKeyDown = (e: any) => {
     if ((e.charCode || e.keyCode) === 27) {
       onClose()
     }
   }
 
+  const handleColorChange = (e: any) => {
+    setColor(e.target.value)
+    onCreateImage(e.target.value)
+  }
+
   useEffect(() => {
-    document.body.addEventListener('keydown', closeOnEscapeKeyDown)
+    document.body.addEventListener('keydown', handleCloseOnEscapeKeyDown)
     return () => {
-      document.body.removeEventListener('keydown', closeOnEscapeKeyDown)
+      document.body.removeEventListener('keydown', handleCloseOnEscapeKeyDown)
     }
   })
   if (!show) return null
@@ -31,12 +37,13 @@ export default function Modal({ show, image, onClose, onClick }: any) {
         </div>
         <div className="modal_body">
           <img src={image} alt="" />
+          <input type="color" onChange={handleColorChange} value={color} />
         </div>
         <div className="modal_footer">
           <button type="button" onClick={onClose}>
             Cancel
           </button>
-          <button type="button" onClick={onClickSave}>
+          <button type="button" onClick={handleClickSave}>
             Save
           </button>
         </div>
