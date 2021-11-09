@@ -1,24 +1,22 @@
 import React, { useState, useRef, useCallback } from 'react'
 import './App.scss'
 
+// Drag-and-Drop
 import {
   DndContext,
-  useDroppable,
   closestCenter,
-  MouseSensor,
   useSensor,
   useSensors,
-  TouchSensor,
   PointerSensor,
   KeyboardSensor
 } from '@dnd-kit/core'
 import { rectSortingStrategy, SortableContext, arrayMove } from '@dnd-kit/sortable'
 import { restrictToParentElement } from '@dnd-kit/modifiers'
+
 import { toPng } from 'html-to-image'
 
 import Card from '../Card/Card'
 import SearchBox from '../SearchBox/SearchBox'
-import Modal from '../Modal/Modal'
 
 type TProps = {
   title: string
@@ -37,47 +35,46 @@ type TCard = {
   className: string
   index: number
 }
+
+const arr = Array(9).fill({
+  id: null,
+  listIndex: null,
+  title: '',
+  imageSrc: '',
+  rating: 0,
+  state: false,
+  className: 'card'
+})
+const indexedArr = arr.map((item, index) => {
+  const newID = index.toString()
+  return { ...item, id: newID, listIndex: newID }
+})
+
 function App(): JSX.Element {
-  const arr = Array(9).fill({
-    id: null,
-    listIndex: null,
-    title: '',
-    imageSrc: '',
-    rating: 0,
-    state: false,
-    className: 'card'
-  })
-  const newArr = arr.map((item, index) => {
-    const newID = index.toString()
-    return { ...item, id: newID, listIndex: newID }
-  })
-  const [shows, setShows] = useState(newArr)
-  const [showModal, setShowModal] = useState(false)
-  const [image, setImage] = useState('')
+  const [shows, setShows] = useState(indexedArr)
   const ref = useRef<HTMLDivElement>(null)
 
-  const handleCreateImage = useCallback(
-    async (color?) => {
-      if (ref.current === null) {
-        return
-      }
-      const tempImage = await toPng(ref.current, {
-        cacheBust: true,
-        backgroundColor: color || '#292d3e',
-        width: 600
-      })
-      setImage(tempImage)
-    },
-    [ref]
-  )
-
-  const handleOpenModal = () => {
-    handleCreateImage()
-    setShowModal(true)
-  }
-
-  // dnd
   const sensor = useSensors(useSensor(PointerSensor), useSensor(KeyboardSensor))
+
+  const createImage = useCallback(() => {
+    if (ref.current === null) {
+      return
+    }
+    toPng(ref.current, {
+      cacheBust: true,
+      backgroundColor: '#292d3e',
+      width: 600
+    })
+      .then(dataUrl => {
+        const link = document.createElement('a')
+        link.download = '3x3-show-list.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [ref])
 
   // TODO make a common method for search through objects of array
   const onAddShow = (id: string, title: string, imageSrc: any) => {
@@ -119,10 +116,6 @@ function App(): JSX.Element {
     setShows(newShows)
   }
 
-  const onModalClose = () => {
-    setShowModal(false)
-  }
-
   const handleDragEnd = (event: any) => {
     const { active, over } = event
     if (active.id !== over.id) {
@@ -138,7 +131,7 @@ function App(): JSX.Element {
     }
   }
 
-  const cardsItem = shows.map((card, index) => (
+  const cardsItem = shows.map(card => (
     <Card {...card} id={card.id} key={card.id} onRemoveShow={onRemoveShow} />
   ))
 
@@ -157,15 +150,9 @@ function App(): JSX.Element {
           </div>
         </SortableContext>
       </DndContext>
-      <button type="button" onClick={handleOpenModal}>
+      <button type="button" onClick={createImage}>
         Click
       </button>
-      <Modal
-        show={showModal}
-        onClose={onModalClose}
-        image={image}
-        onCreateImage={handleCreateImage}
-      />
     </div>
   )
 }
