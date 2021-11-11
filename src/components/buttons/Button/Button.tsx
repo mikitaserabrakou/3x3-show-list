@@ -9,7 +9,7 @@ type TProps = {
 
 export default function Button({ handleClick, type, children = '' }: TProps): JSX.Element {
   return (
-    <button type="button" className={`btn--${type}`} onMouseDown={handleClick}>
+    <button type="button" className={`btn btn--${type}`} onMouseDown={handleClick}>
       {children}
     </button>
   )

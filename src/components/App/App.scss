@@ -1,14 +1,20 @@
 .container {
-  max-width: 1920px;
-  width: 100%;
-}
-.item_grid {
-  justify-content: center;
   display: grid;
-  grid-template-columns: repeat(3, 174px);
-  gap: 10px;
-  padding: 24px 0px 24px 0px;
-}
-* {
-  box-sizing: border-box;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  column-gap: 12px;
+
+  .grid {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 174px);
+    gap: 10px;
+    padding: 24px 0px 24px 0px;
+    grid-column-start: 2;
+  }
+
+  .settings {
+    padding: 24px 0px 0px 0px;
+    margin-left: 48px;
+  }
 }

@@ -17,6 +17,7 @@ import { toPng } from 'html-to-image'
 
 import Card from '../Card/Card'
 import SearchBox from '../SearchBox/SearchBox'
+import Button from '../buttons/Button/Button'
 
 type TProps = {
   title: string
@@ -61,7 +62,6 @@ function App(): JSX.Element {
       return
     }
     toPng(ref.current, {
-      cacheBust: true,
       backgroundColor: '#292d3e',
       width: 600
     })
@@ -78,24 +78,18 @@ function App(): JSX.Element {
 
   // TODO make a common method for search through objects of array
   const onAddShow = (id: string, title: string, imageSrc: any) => {
-    console.log(id)
-    const findElement = (element: TCard) => element.state === false
-    const checkShow = (element: TCard) => element.id === id
-    if (shows.findIndex(findElement) === -1) {
+    const index = shows.findIndex((element: TCard) => element.state === false)
+    if (index === -1) {
       alert('You have already filled all available slots')
-    } else if (shows.findIndex(checkShow) !== -1) {
+    } else if (shows.findIndex((element: TCard) => element.id === id) !== -1) {
       alert('This show is already added.')
-    } else {
-      const index = shows.findIndex(findElement)
-      console.log(index)
-      if (index !== -1) {
-        const newShows: any = shows.map((show, showIndex) => {
-          if (showIndex === index)
-            return { ...show, id, title, imageSrc, state: true, className: 'card--filled' }
-          return show
-        })
-        setShows(newShows)
-      }
+    } else if (index !== -1) {
+      const newShows: any = shows.map((show, showIndex) => {
+        if (showIndex === index)
+          return { ...show, id, title, imageSrc, state: true, className: 'card--filled' }
+        return show
+      })
+      setShows(newShows)
     }
   }
 
@@ -119,10 +113,8 @@ function App(): JSX.Element {
   const handleDragEnd = (event: any) => {
     const { active, over } = event
     if (active.id !== over.id) {
-      const checkActiveId = (element: TCard) => element.id === active.id
-      const checkOverId = (element: TCard) => element.id === over.id
-      const oldIndex = shows.findIndex(checkActiveId)
-      const newIndex = shows.findIndex(checkOverId)
+      const oldIndex = shows.findIndex((element: TCard) => element.id === active.id)
+      const newIndex = shows.findIndex((element: TCard) => element.id === over.id)
       console.log(oldIndex, newIndex, active.id, over.id)
       if (oldIndex !== -1 && newIndex !== -1) {
         const newShows = arrayMove(shows, oldIndex, newIndex)
@@ -136,7 +128,7 @@ function App(): JSX.Element {
   ))
 
   return (
-    <div className="container">
+    <div>
       <SearchBox onAddShow={onAddShow} />
       <DndContext
         sensors={sensor}
@@ -145,14 +137,18 @@ function App(): JSX.Element {
         modifiers={[restrictToParentElement]}
       >
         <SortableContext items={shows} strategy={rectSortingStrategy}>
-          <div className="item_grid" ref={ref}>
-            {cardsItem}
+          <div className="container">
+            <div className="grid" ref={ref}>
+              {cardsItem}
+            </div>
+            <div className="settings">
+              <Button type="save" handleClick={createImage}>
+                Save
+              </Button>
+            </div>
           </div>
         </SortableContext>
       </DndContext>
-      <button type="button" onClick={createImage}>
-        Click
-      </button>
     </div>
   )
 }

@@ -21,9 +21,12 @@
     padding: 8px;
     font-size: 18px;
     align-items: center;
+    &:last-child {
+      border-bottom: none;
+    }
   }
 
-  .results__info {
+  &__info {
     padding-left: 12px;
     display: flex;
     flex-direction: column;
@@ -33,19 +36,11 @@
     flex-grow: 2;
   }
 
-  .results__title {
+  &__title {
     margin: 0px;
   }
 
-  .results__year {
+  &__year {
     margin: 0px;
-  }
-
-  li:last-child {
-    border-bottom: none;
-  }
-  .btn--add {
-    cursor: pointer;
-    color: #ffffff;
   }
 }
