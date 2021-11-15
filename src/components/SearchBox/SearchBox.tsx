@@ -29,7 +29,7 @@ export default function SearchBox({ onAddShow }: TProps) {
   const [isFocused, setIsFocused] = useToggle(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    fetch(`http://api.tvmaze.com/search/shows?q=${event.currentTarget.value}`)
+    fetch(`https://api.tvmaze.com/search/shows?q=${event.currentTarget.value}`)
   }
 
   return (
