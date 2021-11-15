@@ -1,7 +1,8 @@
 import React, { useState, useCallback, SyntheticEvent } from 'react'
 import './SearchBox.scss'
-import axios from 'axios'
 import SearchResults from '../SearchResults/SearchResults'
+
+import useAxios from './useAxios'
 
 type TProps = {
   onAddShow: (id: string, title: string, imageSrc: any) => void
@@ -19,9 +20,7 @@ const useToggle = (initialState = false): [boolean, any] => {
 }
 
 export default function SearchBox({ onAddShow }: TProps) {
-  const [results, setResulst] = useState([])
-  const [isLoaded, setIsLoadead] = useState(false)
-  // const [error, setError] = useState(null)
+  const [data, fetch, loading] = useAxios()
 
   const handleMouseDown = (event: SyntheticEvent) => {
     event.preventDefault()
@@ -29,35 +28,23 @@ export default function SearchBox({ onAddShow }: TProps) {
 
   const [isFocused, setIsFocused] = useToggle(false)
 
-  const fetchData = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setIsLoadead(false)
-    axios
-      .get(`http://api.tvmaze.com/search/shows?q=${e.currentTarget.value}`)
-      .then(res => {
-        if (res.data.length > 0) {
-          setResulst(res.data)
-          console.log(res.data)
-          setIsLoadead(true)
-        } else setIsLoadead(false)
-      })
-      .catch(err => {
-        setIsLoadead(false)
-        console.log(err)
-      })
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    fetch(`http://api.tvmaze.com/search/shows?q=${event.currentTarget.value}`)
   }
+
   return (
     <div className="search_box">
       <input
         type="text"
         className="search_bar"
-        onChange={fetchData}
+        onChange={handleChange}
         onFocus={setIsFocused}
         onBlur={setIsFocused}
-        placeholder="Movie/show/anime name, e.g. Attack on Titan"
+        placeholder="Enter show name"
       />
-      {isLoaded && isFocused ? (
+      {data && isFocused ? (
         <ul className="results" onFocus={setIsFocused} onBlur={setIsFocused}>
-          {results.map((item: any, index) => (
+          {data.map((item: any) => (
             <li key={item.show.id} onMouseDown={handleMouseDown}>
               <SearchResults
                 id={item.show.id}

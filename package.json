@@ -2,6 +2,7 @@
   "name": "3x3-show-list",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://placehold.co/",
   "dependencies": {
     "@dnd-kit/core": "^4.0.1",
     "@dnd-kit/modifiers": "^4.0.0",

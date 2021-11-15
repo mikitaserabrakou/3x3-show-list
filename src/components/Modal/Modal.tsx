@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import Button from '../buttons/Button/Button'
 import './Modal.scss'
 
-import { HexColorPicker } from 'react-colorful'
-import useDebouncy from 'use-debouncy/lib/fn'
-
-export default function Modal({ show, image, onClose, onCreateImage }: any) {
-  const [color, setColor] = useState('')
-
+export default function Modal({ image, onClose }: any) {
   const handleClickSave = () => {
     const link = document.createElement('a')
     link.download = '3x3-show-list.png'
@@ -20,11 +16,6 @@ export default function Modal({ show, image, onClose, onCreateImage }: any) {
     }
   }
 
-  const handleChange = useDebouncy(newValue => {
-    setColor(newValue)
-    onCreateImage(newValue)
-  }, 200)
-
   useEffect(() => {
     document.body.addEventListener('keydown', handleCloseOnEscapeKeyDown)
     return () => {
@@ -32,25 +23,19 @@ export default function Modal({ show, image, onClose, onCreateImage }: any) {
     }
   })
 
-  if (!show) return null
-
   return (
     <div className="modal">
       <div className="modal_content">
-        <div className="modal_header">
-          <h4 className="modal_title">Save 3x3 as image</h4>
-        </div>
         <div className="modal_body">
           <img src={image} alt="" />
-          <HexColorPicker color={color} onChange={handleChange} />
         </div>
         <div className="modal_footer">
-          <button type="button" onClick={onClose}>
-            Cancel
-          </button>
-          <button type="button" onClick={handleClickSave}>
+          <Button type="cancel" handleClick={onClose}>
+            Close{' '}
+          </Button>
+          <Button type="save" handleClick={handleClickSave}>
             Save
-          </button>
+          </Button>
         </div>
       </div>
     </div>

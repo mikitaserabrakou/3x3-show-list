@@ -11,7 +11,8 @@
   z-index: 9999;
 
   &_content {
-    background-color: #2b3250;
+    background-color: #2a2d3e;
+    border: 1px solid #ffffff;
   }
 
   &_header {
@@ -19,7 +20,7 @@
 
     .modal_title {
       margin: 0;
-      color: rgb(255, 255, 255);
+      color: #ffffff;
     }
   }
 
@@ -27,14 +28,14 @@
     display: flex;
     justify-content: center;
     padding: 12px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
     img {
-      width: 70%;
+      width: 80%;
     }
   }
 
   &_footer {
+    display: flex;
+    justify-content: center;
     padding: 12px;
   }
 }

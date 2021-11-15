@@ -13,11 +13,12 @@ import {
 import { rectSortingStrategy, SortableContext, arrayMove } from '@dnd-kit/sortable'
 import { restrictToParentElement } from '@dnd-kit/modifiers'
 
-import { toPng } from 'html-to-image'
+import { toJpeg } from 'html-to-image'
 
 import Card from '../Card/Card'
 import SearchBox from '../SearchBox/SearchBox'
 import Button from '../buttons/Button/Button'
+import Modal from '../Modal/Modal'
 
 type TProps = {
   title: string
@@ -31,7 +32,6 @@ type TCard = {
   id: string
   title: string
   imageSrc: any
-  rating?: number
   state: boolean
   className: string
   index: number
@@ -41,8 +41,7 @@ const arr = Array(9).fill({
   id: null,
   listIndex: null,
   title: '',
-  imageSrc: '',
-  rating: 0,
+  imageSrc: null,
   state: false,
   className: 'card'
 })
@@ -53,23 +52,30 @@ const indexedArr = arr.map((item, index) => {
 
 function App(): JSX.Element {
   const [shows, setShows] = useState(indexedArr)
+  const [showModal, setShowModal] = useState(false)
+  const [image, setImage] = useState('')
   const ref = useRef<HTMLDivElement>(null)
 
-  const sensor = useSensors(useSensor(PointerSensor), useSensor(KeyboardSensor))
+  const sensor = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5
+      }
+    }),
+    useSensor(KeyboardSensor)
+  )
 
-  const createImage = useCallback(() => {
+  const createImage = useCallback(async () => {
     if (ref.current === null) {
       return
     }
-    toPng(ref.current, {
+    await toJpeg(ref.current, {
+      quality: 0.95,
       backgroundColor: '#292d3e',
       width: 600
     })
       .then(dataUrl => {
-        const link = document.createElement('a')
-        link.download = '3x3-show-list.png'
-        link.href = dataUrl
-        link.click()
+        setImage(dataUrl)
       })
       .catch(err => {
         console.log(err)
@@ -86,7 +92,15 @@ function App(): JSX.Element {
     } else if (index !== -1) {
       const newShows: any = shows.map((show, showIndex) => {
         if (showIndex === index)
-          return { ...show, id, title, imageSrc, state: true, className: 'card--filled' }
+          return {
+            ...show,
+            id,
+            title,
+            imageSrc:
+              imageSrc || `https:://placehold.co/252/292d3e/ffffff?text=${title}&font=roboto`,
+            state: true,
+            className: 'card--filled'
+          }
         return show
       })
       setShows(newShows)
@@ -100,8 +114,7 @@ function App(): JSX.Element {
           ...show,
           id: show.listIndex,
           title: '',
-          imageSrc: '',
-          rating: 0,
+          imageSrc: null,
           state: false,
           className: 'card'
         }
@@ -123,12 +136,22 @@ function App(): JSX.Element {
     }
   }
 
+  const handleOpenModal = async () => {
+    await createImage()
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false)
+  }
+
   const cardsItem = shows.map(card => (
     <Card {...card} id={card.id} key={card.id} onRemoveShow={onRemoveShow} />
   ))
 
   return (
     <div>
+      {showModal ? <Modal image={image} onClose={handleCloseModal} /> : null}
       <SearchBox onAddShow={onAddShow} />
       <DndContext
         sensors={sensor}
@@ -142,9 +165,12 @@ function App(): JSX.Element {
               {cardsItem}
             </div>
             <div className="settings">
-              <Button type="save" handleClick={createImage}>
-                Save
-              </Button>
+              <div>
+                <h3>Save as image</h3>
+                <Button type="save" handleClick={handleOpenModal}>
+                  Save
+                </Button>
+              </div>
             </div>
           </div>
         </SortableContext>
