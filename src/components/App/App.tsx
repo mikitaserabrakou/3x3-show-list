@@ -97,7 +97,7 @@ function App(): JSX.Element {
             id,
             title,
             imageSrc:
-              imageSrc || `https:://placehold.co/252/292d3e/ffffff?text=${title}&font=roboto`,
+              imageSrc || `https://placehold.co/252/292d3e/ffffff?text=${title}&font=roboto`,
             state: true,
             className: 'card--filled'
           }

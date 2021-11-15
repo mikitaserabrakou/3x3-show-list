@@ -2,7 +2,6 @@
   "name": "3x3-show-list",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://placehold.co/",
   "dependencies": {
     "@dnd-kit/core": "^4.0.1",
     "@dnd-kit/modifiers": "^4.0.0",
@@ -16,15 +15,13 @@
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "axios": "^0.21.1",
-    "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.25.1",
     "html-to-image": "^1.9.0",
-    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
@@ -58,6 +55,6 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.37.5"
+    "sass": "^1.43.4"
   }
 }
