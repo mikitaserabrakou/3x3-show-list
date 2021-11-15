@@ -7,9 +7,19 @@ type TProps = {
   children?: React.ReactNode
 }
 
+const handleMouseDown = (event: SyntheticEvent) => {
+  event.preventDefault()
+  event.stopPropagation()
+}
+
 export default function Button({ handleClick, type, children = '' }: TProps): JSX.Element {
   return (
-    <button type="button" className={`btn btn--${type}`} onMouseDown={handleClick}>
+    <button
+      type="button"
+      className={`btn btn--${type}`}
+      onMouseDown={handleMouseDown}
+      onClick={handleClick}
+    >
       {children}
     </button>
   )

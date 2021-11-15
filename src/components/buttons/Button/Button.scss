@@ -1,26 +1,30 @@
 .btn {
-  height: 24px;
-  width: 48px;
-  margin: auto;
-  background-color: #3d1f5f;
+  display: inline-block;
+  height: 32px;
+  width: 72px;
+  margin: 0 0.3em 0.3em 0;
+  border: 0.1em solid #ffffff;
+  border-radius: 0.12em;
+  background-color: #17171d;
   color: #ffffff;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 0.75rem;
-  font-weight: 400;
-  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s;
   &:focus {
     outline: 2px dashed #17171d;
   }
+  &:hover {
+    color: #000000;
+    background-color: #ffffff;
+  }
   &--add {
     position: relative;
-    height: 24px;
-    width: 48px;
-    margin: auto;
-    background: none;
-    border: 1px solid #2b2baa;
-    border-radius: 4px;
-    background-color: #17171d;
+    height: 32px;
+    width: 64px;
   }
   &--more {
     margin: 32px 0px 4px 0px;
@@ -35,17 +39,19 @@
   }
   &--remove {
     margin-top: 64px;
-    height: 18px;
     background: none;
     border: none;
     text-decoration: underline;
+    &:hover {
+      background-color: #aa1616;
+      color: #ffffff;
+    }
   }
   &--save {
     width: 72px;
     height: 32px;
-    font-size: 1rem;
-    font-weight: 400;
-    border: 1px solid #4d2d72;
-    font-family: Verdana;
+  }
+  &--cancel {
+    background: none;
   }
 }

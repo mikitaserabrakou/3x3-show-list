@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React from 'react'
 import Button from '../buttons/Button/Button'
 import './SearchResults.scss'
 
@@ -17,13 +17,17 @@ export default function SearchResults({
   year,
   onAddShow
 }: TProps): JSX.Element {
-  const handleClick = (event: SyntheticEvent) => {
-    event.preventDefault()
+  const handleClick = () => {
     onAddShow(id.toString(), title, imageSrc)
   }
   return (
     <>
-      <img src={imageSrc} alt="" />
+      <img
+        src={imageSrc || `https://via.placeholder.com/252/292d3e/ffffff/?text=${title}`}
+        alt=""
+        height={72}
+        width={51}
+      />
       <div className="results__info">
         <p className="results__title">{title}</p>
         <p className="results__year">{year.split('-')[0]}</p>
