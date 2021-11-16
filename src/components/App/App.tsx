@@ -128,7 +128,6 @@ function App(): JSX.Element {
     if (active.id !== over.id) {
       const oldIndex = shows.findIndex((element: TCard) => element.id === active.id)
       const newIndex = shows.findIndex((element: TCard) => element.id === over.id)
-      console.log(oldIndex, newIndex, active.id, over.id)
       if (oldIndex !== -1 && newIndex !== -1) {
         const newShows = arrayMove(shows, oldIndex, newIndex)
         setShows(newShows)

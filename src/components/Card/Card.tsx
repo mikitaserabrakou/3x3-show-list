@@ -33,7 +33,7 @@ export default function Card({ id, title, imageSrc, state, className, onRemoveSh
       <div className={className}>
         {state ? (
           <>
-            <img className="card__image" src={imageSrc} alt="" />
+            <img className="card__image" src={imageSrc} alt={title} />
             <div className="card__content">
               <h1 className="card__title">{title}</h1>
               <Button type="remove" handleClick={handleClick}>
