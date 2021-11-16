@@ -70,6 +70,7 @@ function App(): JSX.Element {
       return
     }
     await toJpeg(ref.current, {
+      cacheBust: true,
       quality: 0.95,
       backgroundColor: '#292d3e',
       width: 600
