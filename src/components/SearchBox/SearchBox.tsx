@@ -40,7 +40,7 @@ export default function SearchBox({ onAddShow }: TProps) {
         onChange={handleChange}
         onFocus={setIsFocused}
         onBlur={setIsFocused}
-        placeholder="Enter show name"
+        placeholder="Enter tv-show name"
       />
       {data && isFocused ? (
         <ul className="results" onFocus={setIsFocused} onBlur={setIsFocused}>
