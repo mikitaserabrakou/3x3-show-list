@@ -145,7 +145,7 @@ function App(): JSX.Element {
 
   return (
     <div>
-      {showModal ? <Modal image={image} onClose={handleCloseModal} /> : null}
+      {showModal ? <Modal image={image} onClose={() => setShowModal(false)} /> : null}
       <SearchBox onAddShow={onAddShow} />
       <DndContext
         sensors={sensor}
