@@ -157,7 +157,7 @@ function App(): JSX.Element {
           <div className="container">
             <div className="grid" ref={ref}>
               {shows.map(card => (
-                <Card {...card} id={card.id} key={card.id} onRemoveShow={onRemoveShow} />
+                <Card {...card} id={card.id} key={card.listIndex} onRemoveShow={onRemoveShow} />
               ))}
             </div>
             <div className="settings">
