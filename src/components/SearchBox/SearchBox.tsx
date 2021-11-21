@@ -33,7 +33,7 @@ export default function SearchBox({ onAddShow }: TProps) {
   }
 
   return (
-    <div className="search_box">
+    <>
       <input
         type="text"
         className="search_bar"
@@ -57,6 +57,6 @@ export default function SearchBox({ onAddShow }: TProps) {
           ))}
         </ul>
       ) : null}
-    </div>
+    </>
   )
 }

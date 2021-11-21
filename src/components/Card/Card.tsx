@@ -29,23 +29,19 @@ export default function Card({ id, title, imageSrc, state, className, onRemoveSh
   }
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="flex_div">
       <div className={className}>
-        {state ? (
-          <div className="card__content">
-            {imageSrc ? (
-              <img className="card__image" src={imageSrc} alt={title} />
-            ) : (
-              <h1 className="card__title">{title}</h1>
-            )}
-            <div className="card__body">
-              <h1 className="body__title">{title}</h1>
-              <Button type="remove" handleClick={handleClick}>
-                Remove
-              </Button>
-            </div>
-          </div>
-        ) : null}
+        {imageSrc ? (
+          <img className="card__image" src={imageSrc} alt={title} />
+        ) : (
+          <h1 className="card__title">{title}</h1>
+        )}
+        <div className="card__body">
+          <h1 className="body__title">{title}</h1>
+          <Button type="remove" handleClick={handleClick}>
+            Remove
+          </Button>
+        </div>
       </div>
     </div>
   )

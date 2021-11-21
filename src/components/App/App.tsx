@@ -48,7 +48,11 @@ const arr = Array(9).fill({
 })
 const indexedArr = arr.map((item, index) => {
   const newID = index.toString()
-  return { ...item, id: newID, listIndex: newID }
+  return {
+    ...item,
+    id: newID,
+    listIndex: newID
+  }
 })
 
 function App(): JSX.Element {
@@ -101,7 +105,7 @@ function App(): JSX.Element {
             title,
             imageSrc,
             state: true,
-            className: 'card--filled'
+            className: 'card card--filled'
           }
         return show
       })
@@ -125,6 +129,20 @@ function App(): JSX.Element {
     setShows(newShows)
   }
 
+  const handleReset = () => {
+    const newShows = shows.map(show => {
+      return {
+        ...show,
+        id: show.listIndex,
+        title: '',
+        imageSrc: null,
+        state: false,
+        className: 'card'
+      }
+    })
+    setShows(newShows)
+  }
+
   const handleDragEnd = (event: any) => {
     const { active, over } = event
     if (active.id !== over.id) {
@@ -144,33 +162,35 @@ function App(): JSX.Element {
   }
 
   return (
-    <div>
+    <div className="container">
       {showModal ? <Modal image={image} onClose={() => setShowModal(false)} /> : null}
-      <SearchBox onAddShow={onAddShow} />
-      <DndContext
-        sensors={sensor}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-        modifiers={[restrictToParentElement]}
-      >
-        <SortableContext items={shows} strategy={rectSortingStrategy}>
-          <div className="container">
+      <div className="search_box">
+        <SearchBox onAddShow={onAddShow} />
+      </div>
+      <div className="main">
+        <DndContext
+          sensors={sensor}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+          modifiers={[restrictToParentElement]}
+        >
+          <SortableContext items={shows} strategy={rectSortingStrategy}>
             <div className="grid" ref={ref}>
               {shows.map(card => (
                 <Card {...card} id={card.id} key={card.listIndex} onRemoveShow={onRemoveShow} />
               ))}
             </div>
-            <div className="settings">
-              <div>
-                <h3>Save as image</h3>
-                <Button type="save" handleClick={handleOpenModal}>
-                  Save
-                </Button>
-              </div>
-            </div>
-          </div>
-        </SortableContext>
-      </DndContext>
+          </SortableContext>
+        </DndContext>
+      </div>
+      <div className="settings">
+        <Button type="save" handleClick={handleReset}>
+          Reset
+        </Button>
+        <Button type="save" handleClick={handleOpenModal}>
+          Save
+        </Button>
+      </div>
     </div>
   )
 }
