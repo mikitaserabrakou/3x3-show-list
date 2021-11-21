@@ -167,7 +167,7 @@ function App(): JSX.Element {
       <div className="search_box">
         <SearchBox onAddShow={onAddShow} />
       </div>
-      <div className="main">
+      <div className="main" ref={ref}>
         <DndContext
           sensors={sensor}
           collisionDetection={closestCenter}
@@ -175,7 +175,7 @@ function App(): JSX.Element {
           modifiers={[restrictToParentElement]}
         >
           <SortableContext items={shows} strategy={rectSortingStrategy}>
-            <div className="grid" ref={ref}>
+            <div className="grid">
               {shows.map(card => (
                 <Card {...card} id={card.id} key={card.listIndex} onRemoveShow={onRemoveShow} />
               ))}
