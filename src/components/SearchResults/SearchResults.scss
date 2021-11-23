@@ -1,15 +1,27 @@
 .results {
   position: absolute;
-  top: 36px;
+  top: 52px;
   max-width: 542px;
-  width: 100%;
+  width: 93%;
   list-style-type: none;
-  margin-left: 0;
   padding: 0;
+  margin: 0;
   background: #1a1d29;
   border-radius: 0.4rem;
   z-index: 10;
   box-shadow: 0.2rem 0.8rem 1.6rem #1a1d29;
+  font-size: 1rem;
+
+  @media only screen and (min-width: 360px) {
+    & {
+      font-size: 1.15em;
+    }
+  }
+  @media only screen and (min-width: 720px) {
+    & {
+      font-size: 1.25em;
+    }
+  }
 
   img {
     max-height: 68px;
@@ -20,7 +32,6 @@
     border-bottom: rgba(128, 128, 128, 0.281) solid 1px;
     color: white;
     padding: 8px;
-    font-size: 1.15rem;
     align-items: center;
     &:last-child {
       border-bottom: none;
@@ -28,16 +39,17 @@
   }
 
   &__info {
-    padding-left: 12px;
-    margin: 0px;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    margin: 0;
     flex-grow: 2;
   }
 
   &__title {
-    margin: 0px;
+    margin: 0;
   }
 
   &__year {
-    margin: 0px;
+    margin: 0;
   }
 }

@@ -1,4 +1,5 @@
 .search_box {
+  padding: 1rem 1rem 0 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -16,6 +17,7 @@
   padding-left: 0.9rem;
   background: #f1f1f1;
   transition: box-shadow 300ms;
+
   &:focus {
     outline: none;
     box-shadow: 0.2rem 0.8rem 1.6rem #1a1d29;
