@@ -33,14 +33,14 @@ export default function SearchBox({ onAddShow }: TProps) {
   }
 
   return (
-    <div className="search_box">
+    <>
       <input
         type="text"
         className="search_bar"
         onChange={handleChange}
         onFocus={setIsFocused}
         onBlur={setIsFocused}
-        placeholder="Enter show name"
+        placeholder="Enter tv-show name"
       />
       {data && isFocused ? (
         <ul className="results" onFocus={setIsFocused} onBlur={setIsFocused}>
@@ -57,6 +57,6 @@ export default function SearchBox({ onAddShow }: TProps) {
           ))}
         </ul>
       ) : null}
-    </div>
+    </>
   )
 }

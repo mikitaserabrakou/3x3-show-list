@@ -1,22 +1,22 @@
 .container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.main {
+  display: flex;
   justify-content: center;
-  column-gap: 12px;
-
   .grid {
-    justify-content: center;
-    display: grid;
-    grid-template-columns: repeat(3, 174px);
-    gap: 10px;
-    padding: 24px 0px 24px 0px;
-    grid-column-start: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 542px;
+    padding: 0.75rem 0 0.75rem 0;
   }
-
-  .settings {
-    margin-left: 64px;
-    h3 {
-      color: #ffffff;
-    }
-  }
+}
+.settings {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
 }

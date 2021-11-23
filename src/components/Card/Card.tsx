@@ -28,20 +28,23 @@ export default function Card({ id, title, imageSrc, state, className, onRemoveSh
     transition
   }
 
+  const setBackground = () => {
+    if (imageSrc) {
+      return { background: `center / cover no-repeat  url(${imageSrc})` }
+    }
+    return undefined
+  }
+
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <div className={className}>
-        {state ? (
-          <>
-            <img className="card__image" src={imageSrc} alt={title} />
-            <div className="card__content">
-              <h1 className="card__title">{title}</h1>
-              <Button type="remove" handleClick={handleClick}>
-                Remove
-              </Button>
-            </div>
-          </>
-        ) : null}
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="flex_div">
+      <div style={setBackground()} className={className}>
+        {!imageSrc ? <h1 className="card__title">{title}</h1> : null}
+        <div className="card__body">
+          <h1 className="body__title">{title}</h1>
+          <Button type="remove" handleClick={handleClick}>
+            Remove
+          </Button>
+        </div>
       </div>
     </div>
   )

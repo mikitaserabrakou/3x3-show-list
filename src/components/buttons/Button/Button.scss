@@ -2,7 +2,6 @@
   display: inline-block;
   height: 32px;
   width: 72px;
-  margin: 0 0.3em 0.3em 0;
   border: 0.1em solid #ffffff;
   border-radius: 0.12em;
   background-color: #17171d;
@@ -38,7 +37,6 @@
     cursor: pointer;
   }
   &--remove {
-    margin-top: 64px;
     background: none;
     border: none;
     text-decoration: underline;

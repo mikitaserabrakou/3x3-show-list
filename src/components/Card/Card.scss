@@ -1,66 +1,93 @@
 .card {
-  height: 252px;
-  width: 174px;
   display: flex;
-  align-items: center;
+  height: 100%;
+  min-height: 126px;
   justify-content: center;
-  background: none;
   position: relative;
   transition: 0.4s ease-out;
-  box-shadow: 0px 7px 10px rgba(black, 0.5);
+  box-shadow: 0px 0.43em 0.625em rgba(black, 0.5);
   &--filled {
-    @extend .card;
-  }
-  &--filled:hover {
+    &:hover {
+      &::before {
+        opacity: 1;
+      }
+      .card__body {
+        opacity: 1;
+        transform: translateY(0px);
+      }
+    }
     &::before {
-      opacity: 1;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: rgba(black, 0.6);
+      z-index: 2;
+      transition: 0.5s;
+      opacity: 0;
     }
-    .card__content {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-  }
-  &--filled::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: rgba(black, 0.6);
-    z-index: 2;
-    transition: 0.5s;
-    opacity: 0;
   }
   &__image {
     position: absolute;
-    top: 0;
-    left: 0;
     color: #ffffff;
-    font-size: 2rem;
-    text-align: center;
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
+    z-index: -1;
   }
-  &__content {
+  &__body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 48px;
+    justify-content: space-between;
     position: relative;
     color: white;
     z-index: 3;
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(1.875em);
     transition: 0.5s;
     text-align: center;
+
+    .body__title {
+      padding: 1.5em 0.75em 0 0.75em;
+      color: #ffffff;
+      font-size: 0.75em;
+    }
+    .btn {
+      margin-bottom: 1em;
+    }
   }
-  &__title {
-    margin-top: auto;
-    padding: 0px 12px 0 12px;
+  .card__title {
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 0.75em;
   }
+}
+
+@media only screen and (min-width: 320px) {
+  .card {
+    min-height: 160px;
+  }
+}
+@media only screen and (min-width: 540px) {
+  .card {
+    min-height: 180px;
+  }
+}
+@media only screen and (min-width: 720px) {
+  .card {
+    min-height: 210px;
+  }
+}
+.flex_div {
+  width: 32%;
+  margin-bottom: 2%;
 }

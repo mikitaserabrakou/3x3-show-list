@@ -37,6 +37,7 @@ type TCard = {
   index: number
 }
 
+// initial list of show
 const arr = Array(9).fill({
   id: null,
   listIndex: null,
@@ -47,7 +48,11 @@ const arr = Array(9).fill({
 })
 const indexedArr = arr.map((item, index) => {
   const newID = index.toString()
-  return { ...item, id: newID, listIndex: newID }
+  return {
+    ...item,
+    id: newID,
+    listIndex: newID
+  }
 })
 
 function App(): JSX.Element {
@@ -55,7 +60,6 @@ function App(): JSX.Element {
   const [showModal, setShowModal] = useState(false)
   const [image, setImage] = useState('')
   const ref = useRef<HTMLDivElement>(null)
-
   const sensor = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -71,7 +75,7 @@ function App(): JSX.Element {
     }
     await toJpeg(ref.current, {
       cacheBust: true,
-      quality: 0.95,
+      quality: 0.7,
       backgroundColor: '#292d3e',
       width: 600
     })
@@ -83,24 +87,25 @@ function App(): JSX.Element {
       })
   }, [ref])
 
-  // TODO make a common method for search through objects of array
   const onAddShow = (id: string, title: string, imageSrc: any) => {
+    // check if there any available slots
     const index = shows.findIndex((element: TCard) => element.state === false)
     if (index === -1) {
       alert('You have already filled all available slots')
+      // check if show with this id already added
     } else if (shows.findIndex((element: TCard) => element.id === id) !== -1) {
       alert('This show is already added.')
-    } else if (index !== -1) {
+    } else {
+      // replace available slot with show
       const newShows: any = shows.map((show, showIndex) => {
         if (showIndex === index)
           return {
             ...show,
             id,
             title,
-            imageSrc:
-              imageSrc || `https://placehold.co/252/292d3e/ffffff?text=${title}&font=roboto`,
+            imageSrc,
             state: true,
-            className: 'card--filled'
+            className: 'card card--filled'
           }
         return show
       })
@@ -109,7 +114,7 @@ function App(): JSX.Element {
   }
 
   const onRemoveShow = (id: string) => {
-    const newShows = shows.map((show, index) => {
+    const newShows = shows.map(show => {
       if (show.id === id)
         return {
           ...show,
@@ -124,15 +129,27 @@ function App(): JSX.Element {
     setShows(newShows)
   }
 
+  const handleReset = () => {
+    const newShows = shows.map(show => {
+      return {
+        ...show,
+        id: show.listIndex,
+        title: '',
+        imageSrc: null,
+        state: false,
+        className: 'card'
+      }
+    })
+    setShows(newShows)
+  }
+
   const handleDragEnd = (event: any) => {
     const { active, over } = event
     if (active.id !== over.id) {
       const oldIndex = shows.findIndex((element: TCard) => element.id === active.id)
       const newIndex = shows.findIndex((element: TCard) => element.id === over.id)
-      if (oldIndex !== -1 && newIndex !== -1) {
-        const newShows = arrayMove(shows, oldIndex, newIndex)
-        setShows(newShows)
-      }
+      const newShows = arrayMove(shows, oldIndex, newIndex)
+      setShows(newShows)
     }
   }
 
@@ -140,41 +157,40 @@ function App(): JSX.Element {
     await createImage()
     setShowModal(true)
   }
-
   const handleCloseModal = () => {
     setShowModal(false)
   }
 
-  const cardsItem = shows.map(card => (
-    <Card {...card} id={card.id} key={card.id} onRemoveShow={onRemoveShow} />
-  ))
-
   return (
-    <div>
-      {showModal ? <Modal image={image} onClose={handleCloseModal} /> : null}
-      <SearchBox onAddShow={onAddShow} />
-      <DndContext
-        sensors={sensor}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-        modifiers={[restrictToParentElement]}
-      >
-        <SortableContext items={shows} strategy={rectSortingStrategy}>
-          <div className="container">
-            <div className="grid" ref={ref}>
-              {cardsItem}
+    <div className="container">
+      {showModal ? <Modal image={image} onClose={() => setShowModal(false)} /> : null}
+      <div className="search_box">
+        <SearchBox onAddShow={onAddShow} />
+      </div>
+      <div className="main" ref={ref}>
+        <DndContext
+          sensors={sensor}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+          modifiers={[restrictToParentElement]}
+        >
+          <SortableContext items={shows} strategy={rectSortingStrategy}>
+            <div className="grid">
+              {shows.map(card => (
+                <Card {...card} id={card.id} key={card.listIndex} onRemoveShow={onRemoveShow} />
+              ))}
             </div>
-            <div className="settings">
-              <div>
-                <h3>Save as image</h3>
-                <Button type="save" handleClick={handleOpenModal}>
-                  Save
-                </Button>
-              </div>
-            </div>
-          </div>
-        </SortableContext>
-      </DndContext>
+          </SortableContext>
+        </DndContext>
+      </div>
+      <div className="settings">
+        <Button type="save" handleClick={handleReset}>
+          Reset
+        </Button>
+        <Button type="save" handleClick={handleOpenModal}>
+          Save
+        </Button>
+      </div>
     </div>
   )
 }

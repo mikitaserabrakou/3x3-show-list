@@ -1,18 +1,18 @@
 .search_box {
-  margin: 24px auto 32px auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   height: 100%;
 }
 
 .search_bar {
-  position: absolute;
   font-size: 1.3rem;
-  line-height: 1.8;
+  line-height: 1.6;
   border: none;
   border-radius: 0.4rem;
-  width: 542px;
+  max-width: 542px;
+  width: 100%;
   padding-left: 0.9rem;
   background: #f1f1f1;
   transition: box-shadow 300ms;

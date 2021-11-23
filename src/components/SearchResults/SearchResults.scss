@@ -1,7 +1,8 @@
 .results {
   position: absolute;
-  top: 48px;
-  width: 542px;
+  top: 36px;
+  max-width: 542px;
+  width: 100%;
   list-style-type: none;
   margin-left: 0;
   padding: 0;
@@ -28,10 +29,6 @@
 
   &__info {
     padding-left: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
     margin: 0px;
     flex-grow: 2;
   }
