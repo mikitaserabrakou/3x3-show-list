@@ -3,7 +3,7 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
 import './Card.scss'
-import Button from '../buttons/Button/Button'
+import Button from 'components/Button/Button'
 
 type TProps = {
   id: string

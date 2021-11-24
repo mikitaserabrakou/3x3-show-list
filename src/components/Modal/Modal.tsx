@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Button from '../buttons/Button/Button'
+import Button from 'components/Button/Button'
 import './Modal.scss'
 
 export default function Modal({ image, onClose }: any) {

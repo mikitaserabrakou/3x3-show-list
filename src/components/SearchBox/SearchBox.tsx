@@ -1,6 +1,6 @@
 import React, { useState, useCallback, SyntheticEvent } from 'react'
 import './SearchBox.scss'
-import SearchResults from '../SearchResults/SearchResults'
+import SearchResults from 'components/SearchResults/SearchResults'
 
 import useAxios from './useAxios'
 

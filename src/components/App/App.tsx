@@ -15,10 +15,10 @@ import { restrictToParentElement } from '@dnd-kit/modifiers'
 
 import { toJpeg } from 'html-to-image'
 
-import Card from '../Card/Card'
-import SearchBox from '../SearchBox/SearchBox'
-import Button from '../buttons/Button/Button'
-import Modal from '../Modal/Modal'
+import Card from 'components/Card/Card'
+import SearchBox from 'components/SearchBox/SearchBox'
+import Button from 'components/Button/Button'
+import Modal from 'components/Modal/Modal'
 
 type TProps = {
   title: string

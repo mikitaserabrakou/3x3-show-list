@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../buttons/Button/Button'
+import Button from 'components/Button/Button'
 import './SearchResults.scss'
 
 type TProps = {
