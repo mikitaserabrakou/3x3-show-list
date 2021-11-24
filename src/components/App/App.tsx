@@ -75,8 +75,9 @@ function App(): JSX.Element {
     }
     await toJpeg(ref.current, {
       cacheBust: true,
-      quality: 0.7,
-      backgroundColor: '#292d3e'
+      quality: 0.8,
+      backgroundColor: '#292d3e',
+      pixelRatio: 1
     })
       .then(dataUrl => {
         setImage(dataUrl)
@@ -166,7 +167,7 @@ function App(): JSX.Element {
       <div className="search_box">
         <SearchBox onAddShow={onAddShow} />
       </div>
-      <div className="main" ref={ref}>
+      <div className="main">
         <DndContext
           sensors={sensor}
           collisionDetection={closestCenter}
@@ -174,7 +175,7 @@ function App(): JSX.Element {
           modifiers={[restrictToParentElement]}
         >
           <SortableContext items={shows} strategy={rectSortingStrategy}>
-            <div className="grid">
+            <div className="grid" ref={ref}>
               {shows.map(card => (
                 <Card {...card} id={card.id} key={card.listIndex} onRemoveShow={onRemoveShow} />
               ))}
@@ -183,12 +184,10 @@ function App(): JSX.Element {
         </DndContext>
       </div>
       <div className="settings">
-        <Button type="save" handleClick={handleReset}>
+        <Button className="btn--cancel" onClick={handleReset}>
           Reset
         </Button>
-        <Button type="save" handleClick={handleOpenModal}>
-          Save
-        </Button>
+        <Button onClick={handleOpenModal}>Save</Button>
       </div>
     </div>
   )

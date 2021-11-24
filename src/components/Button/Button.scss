@@ -20,9 +20,6 @@
     color: #000000;
     background-color: #ffffff;
   }
-  &--add {
-    position: relative;
-  }
   &--more {
     margin: 32px 0px 4px 0px;
     border: none;
@@ -42,10 +39,6 @@
       background-color: #aa1616;
       color: #ffffff;
     }
-  }
-  &--save {
-    width: 72px;
-    height: 32px;
   }
   &--cancel {
     background: none;
