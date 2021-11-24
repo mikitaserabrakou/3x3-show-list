@@ -1,6 +1,6 @@
 import React, { useState, useCallback, SyntheticEvent } from 'react'
 import './SearchBox.scss'
-import SearchResults from 'components/SearchResults/SearchResults'
+import SearchResults from 'components/SearchResults'
 
 import useAxios from './useAxios'
 
@@ -19,7 +19,7 @@ const useToggle = (initialState = false): [boolean, any] => {
   return [state, toggle]
 }
 
-export default function SearchBox({ onAddShow }: TProps) {
+export function SearchBox({ onAddShow }: TProps) {
   const [data, fetch, loading] = useAxios()
 
   const handleMouseDown = (event: SyntheticEvent) => {

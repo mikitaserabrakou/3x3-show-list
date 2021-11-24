@@ -3,7 +3,7 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
 import './Card.scss'
-import Button from 'components/Button/Button'
+import Button from 'components/Button'
 
 type TProps = {
   id: string
@@ -14,7 +14,7 @@ type TProps = {
   onRemoveShow: (id: string) => void
 }
 
-export default function Card({ id, title, imageSrc, state, className, onRemoveShow }: TProps) {
+export function Card({ id, title, imageSrc, state, className, onRemoveShow }: TProps) {
   const { attributes, listeners, transform, transition, setNodeRef } = useSortable({
     id: `${id}`
   })

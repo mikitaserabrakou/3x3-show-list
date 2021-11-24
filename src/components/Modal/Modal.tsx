@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import Button from 'components/Button/Button'
+import Button from 'components/Button'
 import './Modal.scss'
 
-export default function Modal({ image, onClose }: any) {
+export function Modal({ image, onClose }: any) {
   const handleClickSave = () => {
     const link = document.createElement('a')
     link.download = '3x3-show-list.png'

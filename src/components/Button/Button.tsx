@@ -12,7 +12,7 @@ const handleMouseDown = (event: SyntheticEvent) => {
   event.stopPropagation()
 }
 
-export default function Button({ handleClick, type, children = '' }: TProps): JSX.Element {
+export function Button({ handleClick, type, children = '' }: TProps): JSX.Element {
   return (
     <button
       type="button"

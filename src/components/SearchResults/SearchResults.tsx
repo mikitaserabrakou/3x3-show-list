@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from 'components/Button/Button'
+import Button from 'components/Button'
 import './SearchResults.scss'
 
 type TProps = {
@@ -10,13 +10,7 @@ type TProps = {
   onAddShow: (id: string, title: string, imageSrc: string) => void
 }
 
-export default function SearchResults({
-  id,
-  title,
-  imageSrc,
-  year,
-  onAddShow
-}: TProps): JSX.Element {
+export function SearchResults({ id, title, imageSrc, year, onAddShow }: TProps): JSX.Element {
   const handleClick = () => {
     onAddShow(id.toString(), title, imageSrc)
   }
