@@ -38,10 +38,10 @@ export function Card({ id, title, imageSrc, state, className, onRemoveShow }: TP
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="flex_div">
       <div style={setBackground()} className={className}>
-        {!imageSrc ? <h1 className="card__title">{title}</h1> : null}
+        {!imageSrc && <h1 className="card__title">{title}</h1>}
         <div className="card__body">
           <h1 className="body__title">{title}</h1>
-          <Button type="remove" handleClick={handleClick}>
+          <Button className="btn--remove" onClick={handleClick}>
             Remove
           </Button>
         </div>

@@ -27,9 +27,7 @@ export function SearchResults({ id, title, imageSrc, year, onAddShow }: TProps):
         <p className="results__year">{year.split('-')[0]}</p>
       </div>
       <div className="results__buttons">
-        <Button type="add" handleClick={handleClick}>
-          Add
-        </Button>
+        <Button onClick={handleClick}>Add</Button>
       </div>
     </>
   )

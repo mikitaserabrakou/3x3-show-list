@@ -30,12 +30,10 @@ export function Modal({ image, onClose }: any) {
           <img src={image} alt="" />
         </div>
         <div className="modal_footer">
-          <Button type="cancel" handleClick={onClose}>
-            Close{' '}
+          <Button className="btn--cancel" onClick={onClose}>
+            Close
           </Button>
-          <Button type="save" handleClick={handleClickSave}>
-            Save
-          </Button>
+          <Button onClick={handleClickSave}>Save</Button>
         </div>
       </div>
     </div>
