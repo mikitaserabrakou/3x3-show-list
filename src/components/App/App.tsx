@@ -76,8 +76,7 @@ function App(): JSX.Element {
     await toJpeg(ref.current, {
       cacheBust: true,
       quality: 0.7,
-      backgroundColor: '#292d3e',
-      width: 600
+      backgroundColor: '#292d3e'
     })
       .then(dataUrl => {
         setImage(dataUrl)
