@@ -2,7 +2,7 @@ import React, { useState, useCallback, SyntheticEvent } from 'react'
 import './SearchBox.scss'
 import SearchResults from 'components/SearchResults'
 
-import useAxios from './useAxios'
+import useAxios from 'utils/useAxios'
 
 type TProps = {
   onAddShow: (id: string, title: string, imageSrc: any) => void
