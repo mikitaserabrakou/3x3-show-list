@@ -1,4 +1,6 @@
 import React from 'react'
+import cn from 'classnames'
+
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
@@ -11,11 +13,10 @@ type TProps = {
   title: string
   imageSrc: string
   state: boolean
-  className: string
   onRemoveShow: (id: string) => void
 }
 
-export function Card({ id, title, imageSrc, state, className, showId, onRemoveShow }: TProps) {
+export function Card({ id, title, imageSrc, state, showId, onRemoveShow }: TProps) {
   const { attributes, listeners, transform, transition, setNodeRef } = useSortable({
     id
   })
@@ -38,7 +39,7 @@ export function Card({ id, title, imageSrc, state, className, showId, onRemoveSh
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="flex_div">
-      <div style={setBackground()} className={className}>
+      <div style={setBackground()} className={cn('card', { 'card--filled': state })}>
         {!imageSrc && <h1 className="card__title">{title}</h1>}
         <div className="card__body">
           <h1 className="body__title">{title}</h1>
