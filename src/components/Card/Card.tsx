@@ -7,6 +7,7 @@ import Button from 'components/Button'
 
 type TProps = {
   id: string
+  showId: string
   title: string
   imageSrc: string
   state: boolean
@@ -14,13 +15,13 @@ type TProps = {
   onRemoveShow: (id: string) => void
 }
 
-export function Card({ id, title, imageSrc, state, className, onRemoveShow }: TProps) {
+export function Card({ id, title, imageSrc, state, className, showId, onRemoveShow }: TProps) {
   const { attributes, listeners, transform, transition, setNodeRef } = useSortable({
-    id: `${id}`
+    id
   })
 
   const handleClick = () => {
-    onRemoveShow(id)
+    onRemoveShow(showId)
   }
 
   const style = {

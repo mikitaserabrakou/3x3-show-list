@@ -19,17 +19,19 @@ import Card from 'components/Card'
 import SearchBox from 'components/SearchBox'
 import Button from 'components/Button/'
 import Modal from 'components/Modal'
+import { builtinModules } from 'module'
 
 type TProps = {
   title: string
   imageSrc: any
   year: string
-  onAddShow: (id: string, title: string, imageSrc: string) => void
-  onRemoveShow: () => void
+  onAddShow: (showId: string, title: string, imageSrc: string) => void
+  onRemoveShow: (showId: string) => null
 }
 
 type TCard = {
   id: string
+  showId: string
   title: string
   imageSrc: any
   state: boolean
@@ -38,25 +40,24 @@ type TCard = {
 }
 
 // initial list of show
-const arr = Array(9).fill({
-  id: null,
-  listIndex: null,
-  title: '',
-  imageSrc: null,
-  state: false,
-  className: 'card'
-})
-const indexedArr = arr.map((item, index) => {
-  const newID = index.toString()
-  return {
-    ...item,
-    id: newID,
-    listIndex: newID
-  }
-})
+const initialArr = Array(9)
+  .fill({
+    id: null,
+    showId: null,
+    title: '',
+    imageSrc: null,
+    state: false,
+    className: 'card'
+  })
+  .map((item, index) => {
+    return {
+      ...item,
+      id: index.toString()
+    }
+  })
 
 function App(): JSX.Element {
-  const [shows, setShows] = useState(indexedArr)
+  const [shows, setShows] = useState(initialArr)
   const [showModal, setShowModal] = useState(false)
   const [image, setImage] = useState('')
   const ref = useRef<HTMLDivElement>(null)
@@ -87,13 +88,13 @@ function App(): JSX.Element {
       })
   }, [ref])
 
-  const onAddShow = (id: string, title: string, imageSrc: any) => {
+  const onAddShow = (showId: string, title: string, imageSrc: any) => {
     // check if there any available slots
     const index = shows.findIndex((element: TCard) => element.state === false)
     if (index === -1) {
       alert('You have already filled all available slots')
-      // check if show with this id already added
-    } else if (shows.findIndex((element: TCard) => element.id === id) !== -1) {
+      // check if show with this showId already added
+    } else if (shows.findIndex((element: TCard) => element.showId === showId) !== -1) {
       alert('This show is already added.')
     } else {
       // replace available slot with show
@@ -101,7 +102,7 @@ function App(): JSX.Element {
         if (showIndex === index)
           return {
             ...show,
-            id,
+            showId,
             title,
             imageSrc,
             state: true,
@@ -113,12 +114,12 @@ function App(): JSX.Element {
     }
   }
 
-  const onRemoveShow = (id: string) => {
+  const onRemoveShow = (showId: string) => {
     const newShows = shows.map(show => {
-      if (show.id === id)
+      if (show.showId === showId)
         return {
           ...show,
-          id: show.listIndex,
+          showId: null,
           title: '',
           imageSrc: null,
           state: false,
@@ -133,7 +134,7 @@ function App(): JSX.Element {
     const newShows = shows.map(show => {
       return {
         ...show,
-        id: show.listIndex,
+        showId: null,
         title: '',
         imageSrc: null,
         state: false,
@@ -177,7 +178,7 @@ function App(): JSX.Element {
           <SortableContext items={shows} strategy={rectSortingStrategy}>
             <div className="grid" ref={ref}>
               {shows.map(card => (
-                <Card {...card} id={card.id} key={card.listIndex} onRemoveShow={onRemoveShow} />
+                <Card {...card} key={card.id} onRemoveShow={onRemoveShow} />
               ))}
             </div>
           </SortableContext>
