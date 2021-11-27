@@ -6,24 +6,12 @@ import { CSS } from '@dnd-kit/utilities'
 
 import './Card.scss'
 import Button from 'components/Button'
+import { ICard } from 'types/Show'
 
-type TProps = {
-  id: string
-  showId: string
-  title: string
-  imageSrc: string
-  state: boolean
-  onRemoveShow: (id: string) => void
-}
-
-export function Card({ id, title, imageSrc, state, showId, onRemoveShow }: TProps) {
+export function Card({ show, state, id, onRemoveShow }: ICard) {
   const { attributes, listeners, transform, transition, setNodeRef } = useSortable({
     id
   })
-
-  const handleClick = () => {
-    onRemoveShow(showId)
-  }
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -31,8 +19,8 @@ export function Card({ id, title, imageSrc, state, showId, onRemoveShow }: TProp
   }
 
   const setBackground = () => {
-    if (imageSrc) {
-      return { background: `center / cover no-repeat  url(${imageSrc})` }
+    if (show.imageSrc) {
+      return { background: `center / cover no-repeat  url(${show.imageSrc})` }
     }
     return undefined
   }
@@ -40,10 +28,10 @@ export function Card({ id, title, imageSrc, state, showId, onRemoveShow }: TProp
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="flex_div">
       <div style={setBackground()} className={cn('card', { 'card--filled': state })}>
-        {!imageSrc && <h1 className="card__title">{title}</h1>}
+        {!show.imageSrc && <h1 className="card__title">{show.title}</h1>}
         <div className="card__body">
-          <h1 className="body__title">{title}</h1>
-          <Button className="btn--remove" onClick={handleClick}>
+          <h1 className="body__title">{show.title}</h1>
+          <Button className="btn--remove" onClick={() => onRemoveShow(id)}>
             Remove
           </Button>
         </div>

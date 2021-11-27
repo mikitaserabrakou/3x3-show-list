@@ -12,40 +12,20 @@ import {
 } from '@dnd-kit/core'
 import { rectSortingStrategy, SortableContext, arrayMove } from '@dnd-kit/sortable'
 import { restrictToParentElement } from '@dnd-kit/modifiers'
-
 import { toJpeg } from 'html-to-image'
 
 import Card from 'components/Card'
 import SearchBox from 'components/SearchBox'
 import Button from 'components/Button/'
 import Modal from 'components/Modal'
-import { builtinModules } from 'module'
-
-type TProps = {
-  title: string
-  imageSrc: any
-  year: string
-  onAddShow: (showId: string, title: string, imageSrc: string) => void
-  onRemoveShow: (showId: string) => null
-}
-
-type TCard = {
-  id: string
-  showId: string
-  title: string
-  imageSrc: any
-  state: boolean
-  index: number
-}
+import { IShow, ICard } from 'types/Show'
 
 // initial list of show
 const initialArr = Array(9)
   .fill({
     id: null,
-    showId: null,
-    title: '',
-    imageSrc: null,
-    state: false
+    state: false,
+    show: { showId: null, title: null, imageSrc: null, premiered: null, summary: null }
   })
   .map((item, index) => {
     return {
@@ -86,54 +66,48 @@ function App(): JSX.Element {
       })
   }, [ref])
 
-  const onAddShow = (showId: string, title: string, imageSrc: any) => {
+  const onAddShow = (show: IShow) => {
     // check if there any available slots
-    const index = shows.findIndex((element: TCard) => element.state === false)
+    const index = shows.findIndex((element: ICard) => element.state === false)
     if (index === -1) {
       alert('You have already filled all available slots')
       // check if show with this showId already added
-    } else if (shows.findIndex((element: TCard) => element.showId === showId) !== -1) {
+    } else if (shows.findIndex((element: ICard) => element.show.id === show.id) !== -1) {
       alert('This show is already added.')
     } else {
       // replace available slot with show
-      const newShows: any = shows.map((show, showIndex) => {
-        if (showIndex === index)
+      const newShows = shows.map((item, itemIndex) => {
+        if (itemIndex === index)
           return {
-            ...show,
-            showId,
-            title,
-            imageSrc,
-            state: true
+            ...item,
+            state: true,
+            show
           }
-        return show
+        return item
       })
       setShows(newShows)
     }
   }
 
-  const onRemoveShow = (showId: string) => {
-    const newShows = shows.map(show => {
-      if (show.showId === showId)
+  const onRemoveShow = (id: string) => {
+    const newShows = shows.map(item => {
+      if (item.id === id)
         return {
-          ...show,
-          showId: null,
-          title: '',
-          imageSrc: null,
-          state: false
+          ...item,
+          state: false,
+          show: { id: null, title: null, imageSrc: null, premiered: null, summary: null }
         }
-      return show
+      return item
     })
     setShows(newShows)
   }
 
   const handleReset = () => {
-    const newShows = shows.map(show => {
+    const newShows = shows.map(item => {
       return {
-        ...show,
-        showId: null,
-        title: '',
-        imageSrc: null,
-        state: false
+        ...item,
+        state: false,
+        show: { id: null, title: null, imageSrc: null, premiered: null, summary: null }
       }
     })
     setShows(newShows)
@@ -142,8 +116,8 @@ function App(): JSX.Element {
   const handleDragEnd = (event: any) => {
     const { active, over } = event
     if (active.id !== over.id) {
-      const oldIndex = shows.findIndex((element: TCard) => element.id === active.id)
-      const newIndex = shows.findIndex((element: TCard) => element.id === over.id)
+      const oldIndex = shows.findIndex((element: ICard) => element.id === active.id)
+      const newIndex = shows.findIndex((element: ICard) => element.id === over.id)
       const newShows = arrayMove(shows, oldIndex, newIndex)
       setShows(newShows)
     }
@@ -152,9 +126,6 @@ function App(): JSX.Element {
   const handleOpenModal = async () => {
     await createImage()
     setShowModal(true)
-  }
-  const handleCloseModal = () => {
-    setShowModal(false)
   }
 
   return (

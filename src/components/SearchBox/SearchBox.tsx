@@ -1,32 +1,22 @@
-import React, { useState, useCallback, SyntheticEvent } from 'react'
+import React, { SyntheticEvent } from 'react'
 import './SearchBox.scss'
-import SearchResults from 'components/SearchResults'
 
 import useAxios from 'utils/useAxios'
+import useToggle from 'utils/useToggle'
+import SearchResults from 'components/SearchResults'
+import { IShow } from 'types/Show'
 
-type TProps = {
-  onAddShow: (id: string, title: string, imageSrc: any) => void
+interface SBProps {
+  onAddShow: (show: IShow) => void
 }
 
-const useToggle = (initialState = false): [boolean, any] => {
-  // Initialize the state
-  const [state, setState] = useState<boolean>(initialState)
-
-  // Define and memorize toggler function in case we pass down the comopnent,
-  // This function change the boolean value to it's opposite value
-  const toggle = useCallback((): void => setState(state => !state), [])
-
-  return [state, toggle]
-}
-
-export function SearchBox({ onAddShow }: TProps) {
-  const [data, fetch, loading] = useAxios()
+export function SearchBox({ onAddShow }: SBProps) {
+  const [data, fetch] = useAxios()
+  const [isFocused, setIsFocused] = useToggle(false)
 
   const handleMouseDown = (event: SyntheticEvent) => {
     event.preventDefault()
   }
-
-  const [isFocused, setIsFocused] = useToggle(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     fetch(`https://api.tvmaze.com/search/shows?q=${event.currentTarget.value}`)
@@ -50,7 +40,7 @@ export function SearchBox({ onAddShow }: TProps) {
                 id={item.show.id}
                 title={item.show.name}
                 imageSrc={item.show.image == null ? '' : item.show.image.medium}
-                year={item.show.premiered == null ? '' : item.show.premiered}
+                premiered={item.show.premiered == null ? '' : item.show.premiered}
                 onAddShow={onAddShow}
               />
             </li>

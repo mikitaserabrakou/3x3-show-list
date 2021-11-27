@@ -1,18 +1,28 @@
 import React from 'react'
-import Button from 'components/Button'
-import './SearchResults.scss'
 
-type TProps = {
+import './SearchResults.scss'
+import Button from 'components/Button'
+import { IShow } from 'types/Show'
+
+type SearchResultsProps = {
   id: string
   title: string
-  imageSrc: any
-  year: string
-  onAddShow: (id: string, title: string, imageSrc: string) => void
+  imageSrc?: any
+  premiered?: string
+  summary?: string
+  onAddShow: (show: IShow) => void
 }
 
-export function SearchResults({ id, title, imageSrc, year, onAddShow }: TProps): JSX.Element {
+export function SearchResults({
+  id,
+  title,
+  imageSrc,
+  premiered,
+  summary,
+  onAddShow
+}: SearchResultsProps): JSX.Element {
   const handleClick = () => {
-    onAddShow(id.toString(), title, imageSrc)
+    onAddShow({ id, title, imageSrc, premiered, summary })
   }
   return (
     <>
@@ -24,7 +34,7 @@ export function SearchResults({ id, title, imageSrc, year, onAddShow }: TProps):
       />
       <div className="results__info">
         <p className="results__title">{title}</p>
-        <p className="results__year">{year.split('-')[0]}</p>
+        <p className="results__premiered">{premiered ? premiered.split('-')[0] : ''}</p>
       </div>
       <div className="results__buttons">
         <Button onClick={handleClick}>Add</Button>

@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react'
-import axios, { AxiosResponse } from 'axios'
+import { useState, useCallback } from 'react'
+import axios from 'axios'
 
 const useAxios = () => {
   const [data, setData] = useState<any | null>([])
@@ -15,7 +15,6 @@ const useAxios = () => {
       })
       .catch(error => {
         setError(error)
-        console.log(error)
       })
       .finally(() => setLoading(false))
   }
