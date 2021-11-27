@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'Source Code Pro', monospace;
+  src: url('../assets/Font/SourceCodePro-Regular.ttf') format('truetype');
+  font-weight: 600;
+}
+
+$font-stack: 'Source Code Pro', monospace;
+$bgcolor: #292d3e;
+
+body {
+  width: 100%;
+  margin: 0;
+  background-color: #292d3e;
+  font-size: 16px;
+  font-family: 'Source Code Pro', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}

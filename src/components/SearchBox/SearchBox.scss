@@ -1,3 +1,5 @@
+@use 'styles/base';
+
 .search_box {
   padding: 1rem 1rem 0 1rem;
   display: flex;
@@ -17,7 +19,8 @@
   padding-left: 0.9rem;
   background: #f1f1f1;
   transition: box-shadow 300ms;
-
+  font-family: base.$font-stack;
+  font-weight: 400;
   &:focus {
     outline: none;
     box-shadow: 0.2rem 0.8rem 1.6rem #1a1d29;
