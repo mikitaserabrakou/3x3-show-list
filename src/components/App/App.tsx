@@ -35,7 +35,6 @@ type TCard = {
   title: string
   imageSrc: any
   state: boolean
-  className: string
   index: number
 }
 
@@ -46,8 +45,7 @@ const initialArr = Array(9)
     showId: null,
     title: '',
     imageSrc: null,
-    state: false,
-    className: 'card'
+    state: false
   })
   .map((item, index) => {
     return {
@@ -105,8 +103,7 @@ function App(): JSX.Element {
             showId,
             title,
             imageSrc,
-            state: true,
-            className: 'card card--filled'
+            state: true
           }
         return show
       })
@@ -122,8 +119,7 @@ function App(): JSX.Element {
           showId: null,
           title: '',
           imageSrc: null,
-          state: false,
-          className: 'card'
+          state: false
         }
       return show
     })
@@ -137,8 +133,7 @@ function App(): JSX.Element {
         showId: null,
         title: '',
         imageSrc: null,
-        state: false,
-        className: 'card'
+        state: false
       }
     })
     setShows(newShows)
