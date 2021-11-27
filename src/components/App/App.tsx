@@ -19,6 +19,7 @@ import SearchBox from 'components/SearchBox'
 import Button from 'components/Button/'
 import Modal from 'components/Modal'
 import { IShow, ICard } from 'types/Show'
+import logo from 'assets/images/GitHub-Mark-32px.png'
 
 // initial list of show
 const initialArr = Array(9)
@@ -155,6 +156,14 @@ function App(): JSX.Element {
           Reset
         </Button>
         <Button onClick={handleOpenModal}>Save</Button>
+      </div>
+      <div className="footer">
+        <div className="github">
+          <img src={logo} alt="" />
+          <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
+        </div>
+
+        <a href="https://www.tvmaze.com/api">Data by TVMaze API</a>
       </div>
     </div>
   )
