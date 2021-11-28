@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100vh;
+  margin: 0;
 }
 
 .main {
@@ -31,7 +33,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 128px;
+  margin-top: auto;
+  margin-bottom: 0.75em;
   font-size: 0.8em;
   a {
     text-decoration: none;

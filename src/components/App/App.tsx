@@ -163,7 +163,7 @@ function App(): JSX.Element {
           <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
         </div>
 
-        <a href="https://www.tvmaze.com/api">Data by TVMaze API</a>
+        <a href="https://www.tvmaze.com/api">Data by TVMAZE API</a>
       </div>
     </div>
   )
