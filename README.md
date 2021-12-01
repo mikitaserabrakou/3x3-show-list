@@ -23,7 +23,7 @@ React website to create a 3x3 grid list of tv-shows and save as image.
 
 1. Clone repo
 
-   `git clone https://github.com/mikitaserabrakou/3x3-show-list.git`
+   `git clone https://github.com/mikitaserabrakou/3x3-show-list.git`\
    `cd 3x3-show-list`
 
 2. Install packeges
