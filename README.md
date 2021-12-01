@@ -38,4 +38,4 @@ React website to create a 3x3 grid list of tv-shows and save as image.
 
 ## License
 
-Distributed under the MIT License. See LICENSE.txt for more information.
+Distributed under the MIT License. See LICENSE.md for more information.
