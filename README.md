@@ -23,17 +23,16 @@ React website to create a 3x3 grid list of tv-show and save as image.
 
 1. Clone repo
 
-### `git clone https://github.com/mikitaserabrakou/3x3-show-list.git`
-
-### `cd 3x3-show-list`
+`git clone https://github.com/mikitaserabrakou/3x3-show-list.git`
+`cd 3x3-show-list`
 
 2. Install packeges
 
-### `npm install`
+`npm install`
 
 3. Start project
 
-### `npm start`
+`npm start`
 
 4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
