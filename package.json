@@ -1,6 +1,6 @@
 {
   "name": "3x3-show-list",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@dnd-kit/core": "^4.0.3",
