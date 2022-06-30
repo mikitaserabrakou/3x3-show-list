@@ -68,6 +68,7 @@
       {
         "endOfLine": "auto"
       }
-    ]
+    ],
+    "no-restricted-exports": "off"
   }
 }
