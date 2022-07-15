@@ -7,7 +7,7 @@ import { IShow } from 'types/Show'
 type SearchResultsProps = {
   id: string
   title: string
-  imageSrc?: any
+  imageSrc?: string
   premiered?: string
   summary?: string
   onAddShow: (show: IShow) => void
