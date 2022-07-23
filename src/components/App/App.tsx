@@ -18,6 +18,7 @@ import Card from 'components/Card'
 import SearchBox from 'components/SearchBox'
 import Button from 'components/Button/'
 import Modal from 'components/Modal'
+import Header from 'components/Header'
 import { IShow, ICard } from 'types/Show'
 import logo from 'assets/images/GitHub-Mark-32px.png'
 
@@ -131,6 +132,7 @@ function App(): JSX.Element {
 
   return (
     <div className="container">
+      <Header />
       {showModal ? <Modal image={image} onClose={() => setShowModal(false)} /> : null}
       <div className="search_box">
         <SearchBox onAddShow={onAddShow} />
