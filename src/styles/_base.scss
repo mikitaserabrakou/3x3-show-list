@@ -5,12 +5,35 @@
 }
 
 $font-stack: 'Source Code Pro', monospace;
-$bgcolor: #292d3e;
+$primary-dark: #292d3e;
+
+.dark-theme {
+  --bgcolor: #292d3e;
+  --darker_bgcolor: #1a1d29;
+  --text_color: #ffffff;
+  --btn_border: #ffffff;
+  --btn_color: #1a1d29;
+  --hover_color: #ffffff;
+  --hover_text: #17171d;
+  --label_color: #b1b1b1;
+  --label_hover: #ffffff;
+}
+.light-theme {
+  --bgcolor: #ffffff;
+  --darker_bgcolor: #ffffff;
+  --text_color: #292d3e;
+  --btn_border: #292d3e;
+  --btn_color: #ffffff;
+  --hover_color: #17171d;
+  --hover_text: #ffffff;
+  --label_color: #60657a;
+  --label_hover: #17171d;
+}
 
 body {
   width: 100%;
   margin: 0;
-  background-color: $bgcolor;
+  background-color: var(--bgcolor);
   font-size: 16px;
   font-family: $font-stack;
   -webkit-font-smoothing: antialiased;
@@ -19,4 +42,8 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+.btn {
+  font-family: $font-stack;
 }

@@ -11,7 +11,7 @@
   z-index: 9999;
 
   &_content {
-    background-color: #2a2d3e;
+    background-color: var(--bgcolor);
     border: 1px solid #ffffff;
   }
 

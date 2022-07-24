@@ -2,10 +2,10 @@
   display: inline-block;
   height: 32px;
   width: 72px;
-  border: 0.1em solid #ffffff;
+  border: 0.1em solid var(--btn_border);
   border-radius: 0.12em;
-  background-color: #17171d;
-  color: #ffffff;
+  background-color: var(--btn_color);
+  color: var(--text_color);
   cursor: pointer;
   font-size: 1rem;
   font-weight: 400;
@@ -17,8 +17,8 @@
     outline: 2px dashed #17171d;
   }
   &:hover {
-    color: #000000;
-    background-color: #ffffff;
+    color: var(--hover_text);
+    background-color: var(--hover_color);
   }
   &--more {
     margin: 32px 0px 4px 0px;
@@ -35,12 +35,14 @@
     background: none;
     border: none;
     text-decoration: underline;
+    color: #ffffff;
     &:hover {
-      background-color: #aa1616;
       color: #ffffff;
+      background-color: #aa1616;
     }
   }
   &--cancel {
-    background: none;
+    @extend .btn--remove;
+    color: var(--text_color);
   }
 }

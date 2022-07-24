@@ -54,10 +54,11 @@ function App(): JSX.Element {
     if (ref.current === null) {
       return
     }
+
     await toJpeg(ref.current, {
       cacheBust: true,
       quality: 0.8,
-      backgroundColor: '#292d3e',
+      backgroundColor: window.localStorage.getItem('theme') === 'dark-theme' ? '#292d3e' : '#fff',
       pixelRatio: 1
     })
       .then(dataUrl => {

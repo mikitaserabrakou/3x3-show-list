@@ -1,0 +1,33 @@
+.theme_toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.theme_label {
+  &__dark,
+  &__light {
+    transition: color 0.2s ease-in-out;
+    cursor: pointer;
+    color: var(--label_color);
+    &:hover {
+      color: var(--label_hover);
+    }
+  }
+}
+
+.dark-theme {
+  .theme_label__dark {
+    pointer-events: none;
+  }
+}
+
+.light-theme {
+  .theme_label__light {
+    pointer-events: none;
+  }
+}
