@@ -24,10 +24,14 @@ export function SearchResults({
   const handleClick = () => {
     onAddShow({ id, title, imageSrc, premiered, summary })
   }
+  const [bg, text] =
+    window.localStorage.getItem('theme') === 'dark-theme'
+      ? ['292d3e', 'ffffff']
+      : ['ffffff', '292d3e']
   return (
     <>
       <img
-        src={imageSrc || `https://via.placeholder.com/252/292d3e/ffffff/?text=${title}`}
+        src={imageSrc || `https://via.placeholder.com/252/${bg}/${text}/?text=${title}`}
         alt=""
         height={72}
         width={51}
