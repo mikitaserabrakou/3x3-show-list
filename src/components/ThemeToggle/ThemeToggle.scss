@@ -1,12 +1,45 @@
 .theme_toggle {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
+  justify-content: center;
+  gap: 12px;
+  input {
+    position: relative;
+    width: 60px;
+    height: 32px;
+    cursor: pointer;
+    appearance: none;
+    user-select: none;
+    background-color: var(--text_color);
+    border-radius: 32px;
+    margin: 0;
+    &:checked {
+      &::before {
+        content: '';
+        height: 26px;
+        width: 26px;
+        position: absolute;
+        border-radius: 26px;
+        top: 3px;
+        left: 28px;
+        background-color: #b4b4b4;
+      }
+    }
+    &::before {
+      content: '';
+      height: 26px;
+      width: 26px;
+      position: absolute;
+      border-radius: 26px;
+      top: 3px;
+      left: 6px;
+      background-color: #fffc3a;
+    }
+    &::before,
+    &::after {
+      transition: all 0.2s ease-in-out;
+    }
+  }
 }
 .theme_label {
   &__dark,

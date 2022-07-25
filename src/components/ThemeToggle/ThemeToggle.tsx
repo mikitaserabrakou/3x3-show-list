@@ -6,7 +6,7 @@ import './ThemeToggle.scss'
 export function ThemeToggle(): JSX.Element {
   const [theme, ToggleTheme] = useTheme()
   return (
-    <>
+    <div className="theme_toggle">
       <span
         className="theme_label__light"
         onClick={() => {
@@ -16,11 +16,11 @@ export function ThemeToggle(): JSX.Element {
         Light
       </span>
       <input
-        className="theme_toggle"
         type="checkbox"
         role="switch"
-        checked={theme === 'dark-theme'}
         aria-label="Toggle theme"
+        aria-checked={theme === 'dark-theme'}
+        checked={theme === 'dark-theme'}
         onChange={ToggleTheme}
       />
       <span
@@ -32,6 +32,6 @@ export function ThemeToggle(): JSX.Element {
       >
         Dark
       </span>
-    </>
+    </div>
   )
 }
