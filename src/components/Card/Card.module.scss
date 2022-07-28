@@ -27,7 +27,7 @@
     }
   }
 
-  &--filled {
+  &__filled {
     &:hover {
       &::before {
         opacity: 1;
@@ -92,4 +92,9 @@
     color: var(--text_color);
     font-size: 0.75em;
   }
+}
+
+.flex_div {
+  width: 32%;
+  margin-bottom: 2%;
 }

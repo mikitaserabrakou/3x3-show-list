@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback } from 'react'
-import './App.scss'
 
 // Drag-and-Drop
 import {
@@ -21,6 +20,7 @@ import Modal from 'components/Modal'
 import Header from 'components/Header'
 import { IShow, ICard } from 'types/Show'
 import logo from 'assets/images/GitHub-Mark-32px.png'
+import styles from './App.module.scss'
 
 // initial list of show
 const initialArr = Array(9)
@@ -132,13 +132,11 @@ function App(): JSX.Element {
   }
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <Header />
       {showModal ? <Modal image={image} onClose={() => setShowModal(false)} /> : null}
-      <div className="search_box">
-        <SearchBox onAddShow={onAddShow} />
-      </div>
-      <div className="main">
+      <SearchBox onAddShow={onAddShow} />
+      <div className={styles.main}>
         <DndContext
           sensors={sensor}
           collisionDetection={closestCenter}
@@ -146,7 +144,7 @@ function App(): JSX.Element {
           modifiers={[restrictToParentElement]}
         >
           <SortableContext items={shows} strategy={rectSortingStrategy}>
-            <div className="grid" ref={ref}>
+            <div className={styles.grid} ref={ref}>
               {shows.map(card => (
                 <Card {...card} key={card.id} onRemoveShow={onRemoveShow} />
               ))}
@@ -154,14 +152,14 @@ function App(): JSX.Element {
           </SortableContext>
         </DndContext>
       </div>
-      <div className="settings">
+      <div className={styles.settings}>
         <Button className="btn--cancel" onClick={handleReset}>
           Reset
         </Button>
         <Button onClick={handleOpenModal}>Save</Button>
       </div>
-      <div className="footer">
-        <div className="github">
+      <div className={styles.footer}>
+        <div className={styles.github}>
           <img src={logo} alt="" />
           <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
         </div>

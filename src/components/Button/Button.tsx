@@ -1,6 +1,7 @@
 import React, { SyntheticEvent } from 'react'
-import './Button.scss'
 import cn from 'classnames'
+
+import styles from './Button.module.scss'
 
 interface ButtonProps {
   className?: string
@@ -17,7 +18,7 @@ export function Button({ onClick, className, children }: ButtonProps): JSX.Eleme
   return (
     <button
       type="button"
-      className={cn('btn', className)}
+      className={cn(styles.btn, className)}
       onMouseDown={handleMouseDown}
       onClick={onClick}
     >
