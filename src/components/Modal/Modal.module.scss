@@ -10,30 +10,31 @@
   justify-content: center;
   z-index: 9999;
 
-  &_content {
+  .content {
     background-color: var(--bgcolor);
     border: 1px solid #ffffff;
   }
 
-  &_header {
+  .header {
     padding: 12px;
 
-    .modal_title {
+    .title {
       margin: 0;
       color: #ffffff;
     }
   }
 
-  &_body {
+  .body {
     display: flex;
     justify-content: center;
     padding: 0.75em 0 0.75em 0;
+
     img {
       width: 90%;
     }
   }
 
-  &_footer {
+  .footer {
     display: flex;
     justify-content: center;
     padding: 0.75em;

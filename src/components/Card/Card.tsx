@@ -26,12 +26,12 @@ export function Card({ show, state, id, onRemoveShow }: ICard) {
   }
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className={styles.flex_div}>
-      <div style={setBackground()} className={cn(styles.card, { [styles.card__filled]: state })}>
-        {!show.imageSrc && <h1 className={styles.card__title}>{show.title}</h1>}
-        <div className={styles.card__body}>
-          <h1 className={styles.body__title}>{show.title}</h1>
-          <Button className="btn--remove" onClick={() => onRemoveShow(id)}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className={styles.flexDiv}>
+      <div style={setBackground()} className={cn(styles.card, { [styles.cardFilled]: state })}>
+        {!show.imageSrc && <h1 className={styles.title}>{show.title}</h1>}
+        <div className={styles.body}>
+          <h1 className={styles.bodyTitle}>{show.title}</h1>
+          <Button type="remove" onClick={() => onRemoveShow(id)}>
             Remove
           </Button>
         </div>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import Button from 'components/Button'
-import './Modal.scss'
+import styles from './Modal.module.scss'
 
 interface ModalProps {
   image: string
@@ -30,13 +30,13 @@ export function Modal({ image, onClose }: ModalProps) {
   })
 
   return (
-    <div className="modal">
-      <div className="modal_content">
-        <div className="modal_body">
+    <div className={styles.modal}>
+      <div className={styles.content}>
+        <div className={styles.body}>
           <img src={image} alt="" />
         </div>
-        <div className="modal_footer">
-          <Button className="btn--cancel" onClick={onClose}>
+        <div className={styles.footer}>
+          <Button type="cancel" onClick={onClose}>
             Close
           </Button>
           <Button onClick={handleClickSave}>Save</Button>

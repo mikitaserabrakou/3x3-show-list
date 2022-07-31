@@ -1,14 +1,14 @@
 import React from 'react'
 
 import useTheme from 'utils/useTheme'
-import './ThemeToggle.scss'
+import styles from './ThemeToggle.module.scss'
 
 export function ThemeToggle(): JSX.Element {
   const [theme, ToggleTheme] = useTheme()
   return (
-    <div className="theme_toggle">
+    <div className={styles.themeToggle}>
       <span
-        className="theme_label__light"
+        className={styles.labelLight}
         onClick={() => {
           if (theme === 'dark-theme') ToggleTheme()
         }}
@@ -24,7 +24,7 @@ export function ThemeToggle(): JSX.Element {
         onChange={ToggleTheme}
       />
       <span
-        className="theme_label__dark"
+        className={styles.labelDark}
         onClick={() => {
           if (theme === 'light-theme') ToggleTheme()
         }}

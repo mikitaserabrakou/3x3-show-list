@@ -11,13 +11,11 @@ type SearchResultsProps = {
 }
 
 const handleMouseDown = (event: SyntheticEvent) => {
+  event.stopPropagation()
   event.preventDefault()
 }
 
 export function SearchResults({ data, onAddShow, setIsFocused }: SearchResultsProps): JSX.Element {
-  // const handleClick = () => {
-  //   onAddShow({ id, title, imageSrc, premiered, summary })
-  // }
   const [bg, text] =
     window.localStorage.getItem('theme') === 'dark-theme'
       ? ['292d3e', 'ffffff']
@@ -35,34 +33,25 @@ export function SearchResults({ data, onAddShow, setIsFocused }: SearchResultsPr
             height={72}
             width={51}
           />
-          <div className={styles.results__info}>
-            <p className={styles.results__title}>{item.show.name}</p>
-            <p className={styles.results__premiered}>
+          <div className={styles.info}>
+            <p className={styles.title}>{item.show.name}</p>
+            <p className={styles.premiered}>
               {item.show.premiered ? item.show.premiered.split('-')[0] : ''}
             </p>
           </div>
-          <div className={styles.results__buttons}>
-            <Button
-              onClick={() =>
-                onAddShow({
-                  id: item.show.id,
-                  title: item.show.name,
-                  imageSrc: item.show.image == null ? '' : item.show.image.medium,
-                  premiered: item.show.premiered ? item.show.premiered.split('-')[0] : ''
-                })
-              }
-            >
-              Add
-            </Button>
-          </div>
-          {/* <SearchResults
-            id={item.show.id}
-            title={}
-            imageSrc={item.show.image == null ? '' : item.show.image.medium}
-            premiered={ == null ? '' : item.show.premiered}
-            setIsFocused={setIsFocused}
-            onAddShow={onAddShow}
-          /> */}
+
+          <Button
+            onClick={() =>
+              onAddShow({
+                id: item.show.id,
+                title: item.show.name,
+                imageSrc: item.show.image == null ? '' : item.show.image.medium,
+                premiered: item.show.premiered ? item.show.premiered.split('-')[0] : ''
+              })
+            }
+          >
+            Add
+          </Button>
         </li>
       ))}
     </ul>
