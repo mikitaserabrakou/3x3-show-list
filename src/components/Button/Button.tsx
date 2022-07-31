@@ -1,9 +1,10 @@
 import React, { SyntheticEvent } from 'react'
-import './Button.scss'
 import cn from 'classnames'
 
+import styles from './Button.module.scss'
+
 interface ButtonProps {
-  className?: string
+  type?: string
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   children: React.ReactNode
 }
@@ -13,11 +14,14 @@ const handleMouseDown = (event: SyntheticEvent) => {
   event.stopPropagation()
 }
 
-export function Button({ onClick, className, children }: ButtonProps): JSX.Element {
+export function Button({ onClick, type, children }: ButtonProps): JSX.Element {
   return (
     <button
       type="button"
-      className={cn('btn', className)}
+      className={cn(styles.btn, {
+        [styles.btnCancel]: type === 'cancel',
+        [styles.btnRemove]: type === 'remove'
+      })}
       onMouseDown={handleMouseDown}
       onClick={onClick}
     >

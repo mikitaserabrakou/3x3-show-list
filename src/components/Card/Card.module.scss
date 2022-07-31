@@ -27,12 +27,12 @@
     }
   }
 
-  &--filled {
+  &Filled {
     &:hover {
       &::before {
         opacity: 1;
       }
-      .card__body {
+      .body {
         opacity: 1;
         transform: translateY(0px);
       }
@@ -51,15 +51,7 @@
       opacity: 0;
     }
   }
-  &__image {
-    position: absolute;
-    color: #ffffff;
-    height: 100%;
-    width: 100%;
-    object-fit: fill;
-    z-index: -1;
-  }
-  &__body {
+  .body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,18 +63,15 @@
     transform: translateY(1.875em);
     transition: 0.5s;
     text-align: center;
+    margin-bottom: 1rem;
 
-    .body__title {
+    &Title {
       padding: 2em 0.5em 0 0.5em;
       color: #ffffff;
       font-size: 0.75em;
     }
-    .btn {
-      margin-bottom: 1em;
-      justify-self: flex-end;
-    }
   }
-  .card__title {
+  .title {
     text-align: center;
     margin: 0;
     position: absolute;
@@ -92,4 +81,9 @@
     color: var(--text_color);
     font-size: 0.75em;
   }
+}
+
+.flexDiv {
+  width: 32%;
+  margin-bottom: 2%;
 }

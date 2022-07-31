@@ -1,10 +1,10 @@
 import React, { SyntheticEvent } from 'react'
-import './SearchBox.scss'
 
 import useAxios from 'utils/useAxios'
 import useToggle from 'utils/useToggle'
 import SearchResults from 'components/SearchResults'
 import { IShow } from 'types/Show'
+import styles from './SearchBox.module.scss'
 
 interface SBProps {
   onAddShow: (show: IShow) => void
@@ -23,30 +23,18 @@ export function SearchBox({ onAddShow }: SBProps) {
   }
 
   return (
-    <>
+    <div className={styles.search_box}>
       <input
         type="text"
-        className="search_bar"
+        className={styles.search_bar}
         onChange={handleChange}
         onFocus={setIsFocused}
         onBlur={setIsFocused}
         placeholder="Enter tv-show name"
       />
       {data && isFocused ? (
-        <ul className="results" onFocus={setIsFocused} onBlur={setIsFocused}>
-          {data.map((item: any) => (
-            <li key={item.show.id} onMouseDown={handleMouseDown}>
-              <SearchResults
-                id={item.show.id}
-                title={item.show.name}
-                imageSrc={item.show.image == null ? '' : item.show.image.medium}
-                premiered={item.show.premiered == null ? '' : item.show.premiered}
-                onAddShow={onAddShow}
-              />
-            </li>
-          ))}
-        </ul>
+        <SearchResults data={data} onAddShow={onAddShow} setIsFocused={setIsFocused} />
       ) : null}
-    </>
+    </div>
   )
 }

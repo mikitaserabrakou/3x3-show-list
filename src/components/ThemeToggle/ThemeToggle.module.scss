@@ -1,8 +1,9 @@
-.theme_toggle {
+.themeToggle {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
+
   input {
     position: relative;
     width: 60px;
@@ -13,6 +14,7 @@
     background-color: var(--text_color);
     border-radius: 32px;
     margin: 0;
+
     &:checked {
       &::before {
         content: '';
@@ -25,6 +27,7 @@
         background-color: #b4b4b4;
       }
     }
+
     &::before {
       content: '';
       height: 26px;
@@ -35,32 +38,34 @@
       left: 6px;
       background-color: #fffc3a;
     }
+
     &::before,
     &::after {
       transition: all 0.2s ease-in-out;
     }
   }
-}
-.theme_label {
-  &__dark,
-  &__light {
-    transition: color 0.2s ease-in-out;
-    cursor: pointer;
-    color: var(--label_color);
-    &:hover {
-      color: var(--label_hover);
+
+  .label {
+    &Dark,
+    &Light {
+      transition: color 0.2s ease-in-out;
+      cursor: pointer;
+      color: var(--label_color);
+      &:hover {
+        color: var(--label_hover);
+      }
     }
   }
-}
 
-.dark-theme {
-  .theme_label__dark {
-    pointer-events: none;
+  .dark-theme {
+    .labelDark {
+      pointer-events: none;
+    }
   }
-}
 
-.light-theme {
-  .theme_label__light {
-    pointer-events: none;
+  .light-theme {
+    .labelLight {
+      pointer-events: none;
+    }
   }
 }

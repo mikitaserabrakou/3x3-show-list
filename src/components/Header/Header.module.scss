@@ -8,9 +8,8 @@
   height: 50px;
   padding: 1.5rem 1rem 1rem 1rem;
   color: var(--text_color);
-  &__links {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
+
+  .logo {
+    font-size: 1.5rem;
   }
 }
