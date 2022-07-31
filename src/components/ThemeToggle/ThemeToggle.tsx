@@ -7,23 +7,23 @@ export function ThemeToggle(): JSX.Element {
   const [theme, ToggleTheme] = useTheme()
   return (
     <div className={styles.themeToggle}>
-      <span
+      <label
         className={styles.labelLight}
         onClick={() => {
           if (theme === 'dark-theme') ToggleTheme()
         }}
       >
         Light
-      </span>
+      </label>
       <input
         type="checkbox"
         role="switch"
-        aria-label="Toggle theme"
+        aria-label={`Switch theme to ${theme === 'dark-theme' ? 'light' : 'dark'}`}
         aria-checked={theme === 'dark-theme'}
         checked={theme === 'dark-theme'}
         onChange={ToggleTheme}
       />
-      <span
+      <label
         className={styles.labelDark}
         onClick={() => {
           if (theme === 'light-theme') ToggleTheme()
@@ -31,7 +31,7 @@ export function ThemeToggle(): JSX.Element {
         aria-hidden="true"
       >
         Dark
-      </span>
+      </label>
     </div>
   )
 }
