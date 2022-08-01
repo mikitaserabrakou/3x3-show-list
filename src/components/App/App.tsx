@@ -20,6 +20,7 @@ import Modal from 'components/Modal'
 import Header from 'components/Header'
 import { IShow, ICard } from 'types/Show'
 import logo from 'assets/images/GitHub-Mark-32px.png'
+import Settings from 'components/Settings'
 import styles from './App.module.scss'
 
 // initial list of show
@@ -125,7 +126,12 @@ function App(): JSX.Element {
       setShows(newShows)
     }
   }
-
+  const handleClickSave = () => {
+    const link = document.createElement('a')
+    link.download = '3x3-show-list.png'
+    link.href = image
+    link.click()
+  }
   const handleOpenModal = async () => {
     await createImage()
     setShowModal(true)
@@ -133,38 +139,40 @@ function App(): JSX.Element {
 
   return (
     <div className={styles.container}>
-      <Header />
-      {showModal ? <Modal image={image} onClose={() => setShowModal(false)} /> : null}
-      <SearchBox onAddShow={onAddShow} />
       <div className={styles.main}>
-        <DndContext
-          sensors={sensor}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-          modifiers={[restrictToParentElement]}
-        >
-          <SortableContext items={shows} strategy={rectSortingStrategy}>
-            <div className={styles.grid} ref={ref}>
-              {shows.map(card => (
-                <Card {...card} key={card.id} onRemoveShow={onRemoveShow} />
-              ))}
+        <div className={styles.layout}>
+          <Header />
+          <SearchBox onAddShow={onAddShow} />
+          {showModal ? <Modal image={image} onClose={() => setShowModal(false)} /> : null}
+          <DndContext
+            sensors={sensor}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+            modifiers={[restrictToParentElement]}
+          >
+            <SortableContext items={shows} strategy={rectSortingStrategy}>
+              <div className={styles.grid} ref={ref}>
+                {shows.map(card => (
+                  <Card {...card} key={card.id} onRemoveShow={onRemoveShow} />
+                ))}
+              </div>
+            </SortableContext>
+          </DndContext>
+          <div className={styles.footer}>
+            <div className={styles.github}>
+              <img src={logo} alt="" />
+              <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
             </div>
-          </SortableContext>
-        </DndContext>
-      </div>
-      <div className={styles.settings}>
-        <Button type="cancel" onClick={handleReset}>
-          Reset
-        </Button>
-        <Button onClick={handleOpenModal}>Save</Button>
-      </div>
-      <div className={styles.footer}>
-        <div className={styles.github}>
-          <img src={logo} alt="" />
-          <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
+            <a href="https://www.tvmaze.com/api">Data by TVMAZE API</a>
+          </div>
         </div>
-
-        <a href="https://www.tvmaze.com/api">Data by TVMAZE API</a>
+        <Settings
+          onSaveClick={async () => {
+            await createImage()
+            handleClickSave()
+          }}
+          onResetClick={handleReset}
+        />
       </div>
     </div>
   )
