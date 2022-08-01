@@ -109,7 +109,8 @@ function App(): JSX.Element {
   const handleReset = () => {
     const newShows = shows.map((item, index) => {
       return {
-        id: index,
+        ...item,
+        id: index.toString(),
         state: false,
         show: { id: null, title: null, imageSrc: null, premiered: null, summary: null }
       }
