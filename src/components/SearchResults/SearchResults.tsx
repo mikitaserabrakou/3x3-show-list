@@ -1,13 +1,15 @@
 import React, { SyntheticEvent } from 'react'
 
+import { useDispatch } from 'react-redux'
+
 import Button from 'components/Button'
 import { IShow } from 'types/Show'
 import styles from './SearchResults.module.scss'
+import { addShow } from '../../store/showSlice'
 
 type SearchResultsProps = {
   data: IShow[]
   setIsFocused: () => void
-  onAddShow: (show: IShow) => void
 }
 
 const handleMouseDown = (event: SyntheticEvent) => {
@@ -15,7 +17,9 @@ const handleMouseDown = (event: SyntheticEvent) => {
   event.preventDefault()
 }
 
-export function SearchResults({ data, onAddShow, setIsFocused }: SearchResultsProps): JSX.Element {
+export function SearchResults({ data, setIsFocused }: SearchResultsProps): JSX.Element {
+  const dispatch = useDispatch()
+
   const [bg, text] =
     window.localStorage.getItem('theme') === 'dark-theme'
       ? ['292d3e', 'ffffff']
@@ -39,15 +43,16 @@ export function SearchResults({ data, onAddShow, setIsFocused }: SearchResultsPr
               {item.show.premiered ? item.show.premiered.split('-')[0] : ''}
             </p>
           </div>
-
           <Button
             onClick={() =>
-              onAddShow({
-                id: item.show.id,
-                title: item.show.name,
-                imageSrc: item.show.image == null ? '' : item.show.image.medium,
-                premiered: item.show.premiered ? item.show.premiered.split('-')[0] : ''
-              })
+              dispatch(
+                addShow({
+                  id: item.show.id,
+                  title: item.show.name,
+                  imageSrc: item.show.image == null ? '' : item.show.image.medium,
+                  premiered: item.show.premiered ? item.show.premiered.split('-')[0] : ''
+                })
+              )
             }
           >
             Add
