@@ -35,6 +35,7 @@ export const settingsSlice = createSlice({
   reducers: {
     changeState: (state, action: PayloadAction<SettingsState>) => {
       state.border = action.payload.border
+      state.shadow = action.payload.shadow
     },
     reset: () => initialState
   }
