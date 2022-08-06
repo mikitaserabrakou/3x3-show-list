@@ -8,6 +8,15 @@
     font-size: 1.4rem;
     color: var(--text_color);
   }
+  h2 {
+    font-size: 1rem;
+    color: var(--text_color);
+  }
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
   .buttons {
     display: flex;
     flex-direction: row;
