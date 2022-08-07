@@ -79,7 +79,7 @@ export function Settings({ onSaveClick, onResetClick }: ISettingsProps): JSX.Ele
         </span>
       </form>
       <div className={styles.buttons}>
-        <Button type="cancel" onClick={onResetClick}>
+        <Button variant="cancel" onClick={onResetClick}>
           Reset
         </Button>
         <Button onClick={onSaveClick}>Save</Button>

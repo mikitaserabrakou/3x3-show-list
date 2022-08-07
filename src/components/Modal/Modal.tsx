@@ -36,7 +36,7 @@ export function Modal({ image, onClose }: ModalProps) {
           <img src={image} alt="" />
         </div>
         <div className={styles.footer}>
-          <Button type="cancel" onClick={onClose}>
+          <Button variant="cancel" onClick={onClose}>
             Close
           </Button>
           <Button onClick={handleClickSave}>Save</Button>

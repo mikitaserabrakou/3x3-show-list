@@ -4,7 +4,8 @@ import cn from 'classnames'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
-  type?: string
+  type?: 'button' | 'submit' | 'reset'
+  variant?: string
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   children: React.ReactNode
 }
@@ -14,13 +15,13 @@ const handleMouseDown = (event: SyntheticEvent) => {
   event.stopPropagation()
 }
 
-export function Button({ onClick, type, children }: ButtonProps): JSX.Element {
+export function Button({ onClick, type = 'button', variant, children }: ButtonProps): JSX.Element {
   return (
     <button
-      type="button"
+      type={type}
       className={cn(styles.btn, {
-        [styles.btnCancel]: type === 'cancel',
-        [styles.btnRemove]: type === 'remove'
+        [styles.btnCancel]: variant === 'cancel',
+        [styles.btnRemove]: variant === 'remove'
       })}
       onMouseDown={handleMouseDown}
       onClick={onClick}
