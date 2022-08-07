@@ -65,7 +65,7 @@ export function Settings({ onSaveClick, onResetClick }: ISettingsProps): JSX.Ele
           <input id="border" type="checkbox" name="border" defaultChecked={border.enabled} />{' '}
         </span>
         <span>
-          <label htmlFor="borderRadius">Radiuse</label>
+          <label htmlFor="borderRadius">Radius</label>
           <input
             id="borderRadius"
             type="text"
