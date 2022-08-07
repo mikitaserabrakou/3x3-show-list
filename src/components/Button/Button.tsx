@@ -6,7 +6,7 @@ import styles from './Button.module.scss'
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset'
   variant?: string
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   children: React.ReactNode
 }
 
