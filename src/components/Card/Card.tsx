@@ -31,7 +31,7 @@ export function Card({ show, state, id, onRemoveShow }: ICard) {
         {!show.imageSrc && <h1 className={styles.title}>{show.title || id} </h1>}
         <div className={styles.body}>
           <h1 className={styles.bodyTitle}>{show.title || id}</h1>
-          <Button type="remove" onClick={() => onRemoveShow(id)}>
+          <Button variant="remove" onClick={() => onRemoveShow(id)}>
             Remove
           </Button>
         </div>

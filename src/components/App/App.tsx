@@ -153,7 +153,7 @@ function App(): JSX.Element {
         </DndContext>
       </div>
       <div className={styles.settings}>
-        <Button type="cancel" onClick={handleReset}>
+        <Button variant="cancel" onClick={handleReset}>
           Reset
         </Button>
         <Button onClick={handleOpenModal}>Save</Button>
