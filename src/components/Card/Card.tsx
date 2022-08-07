@@ -13,7 +13,7 @@ import { removeShow } from '../../store/showSlice'
 
 export function Card({ show, state, id }: ICard) {
   const dispatch = useDispatch()
-  const border = useSelector((state: RootState) => state.settings.border)
+  const { border, shadow } = useSelector((state: RootState) => state.settings)
 
   const { attributes, listeners, transform, transition, setNodeRef } = useSortable({
     id
@@ -29,6 +29,11 @@ export function Card({ show, state, id }: ICard) {
       styles = {
         border: '1px solid var(--btn_border)',
         borderRadius: `${border.borderRadius}px`
+      }
+    if (shadow.enabled)
+      styles = {
+        ...styles,
+        boxShadow: `${shadow.offsetX}em ${shadow.offsetY}em ${shadow.blur}em rgba(0,0,0, 0.5)`
       }
     if (show.imageSrc) {
       styles = { ...styles, background: `center / cover no-repeat  url(${show.imageSrc})` }

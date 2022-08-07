@@ -1,8 +1,10 @@
 import React, { SyntheticEvent } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Button from 'components/Button'
-import { changeState } from 'store/settingsSlice'
+import { changeState, resetSettings } from 'store/settingsSlice'
+import { RootState } from 'store/store'
+
 import styles from './Settings.module.scss'
 
 interface ISettingsProps {
@@ -11,41 +13,53 @@ interface ISettingsProps {
 }
 
 export function Settings({ onSaveClick, onResetClick }: ISettingsProps): JSX.Element {
+  const { border, shadow } = useSelector((state: RootState) => state.settings)
+
   const dispatch = useDispatch()
-  const onSubmit = (event: SyntheticEvent) => {
+  const onSubmit = (event: any) => {
     event.preventDefault()
     const formData = new FormData(event.target as HTMLFormElement)
-    const enabled = formData.get('enabled') === 'on'
-    const number = formData.get('number') as string
     const inputObject = Object.fromEntries(formData)
     dispatch(
       changeState({
-        border: { enabled, borderRadius: number }
+        border: {
+          enabled: inputObject.border === 'on',
+          borderRadius: inputObject.borderRadius as string
+        },
+        shadow: {
+          enabled: inputObject.shadow === 'on',
+          offsetX: inputObject.offsetX as string,
+          offsetY: inputObject.offsetY as string,
+          blur: inputObject.blur as string
+        }
       })
     )
-    console.log(enabled, number)
   }
+
+  const onFormReset = () => {
+    dispatch(resetSettings())
+  }
+
   return (
     <div className={styles.settings}>
       <h1>Settings</h1>
       <div className={styles.options}>
-        <div>
+        <form onSubmit={onSubmit} onReset={onFormReset}>
           <h2>Shadow</h2>
           <div>
-            <input type="checkbox" />
-            <input type="number" />
+            <input type="checkbox" name="shadow" defaultChecked={shadow.enabled} />
+            <input type="text" name="offsetX" defaultValue={shadow.offsetX} />
+            <input type="text" name="offsetY" defaultValue={shadow.offsetY} />
+            <input type="text" name="blur" defaultValue={shadow.blur} />
           </div>
-        </div>
-        <div>
-          <h2>Border</h2>
-          <form onSubmit={onSubmit}>
-            <input type="checkbox" name="enabled" />
-            <input type="number" name="number" />
-            <button type="submit">Apply</button>
-          </form>
-        </div>
-        <Button onClick={onSaveClick}>Save</Button>
-        <Button onClick={onSaveClick}>Save</Button>
+          <div>
+            <h2>Border</h2>
+            <input type="checkbox" name="border" defaultChecked={border.enabled} />
+            <input type="text" name="borderRadius" defaultValue={border.borderRadius} />
+          </div>
+          <input type="submit" value="Save" />
+          <input type="reset" />
+        </form>
       </div>
       <div className={styles.buttons}>
         <Button type="cancel" onClick={onResetClick}>

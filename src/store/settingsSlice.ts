@@ -6,26 +6,26 @@ export interface SettingsState {
     enabled: boolean
     borderRadius: string
   }
-  shadow?: {
+  shadow: {
     enabled: boolean
-    shadowColor: string
-    shadowOffsetX: number
-    shadowOffsetY: number
-    shadowBlur: number
+    color?: string
+    offsetX: string
+    offsetY: string
+    blur: string
   }
 }
 
 const initialState: SettingsState = {
   border: {
     enabled: false,
-    borderRadius: '0'
+    borderRadius: '1'
   },
   shadow: {
     enabled: true,
-    shadowColor: '#00000078',
-    shadowOffsetX: 0,
-    shadowOffsetY: 0.43,
-    shadowBlur: 0.625
+    color: 'rgba(0, 0, 0, 0.5)',
+    offsetX: '0',
+    offsetY: '0.43',
+    blur: '0.625'
   }
 }
 
@@ -37,10 +37,10 @@ export const settingsSlice = createSlice({
       state.border = action.payload.border
       state.shadow = action.payload.shadow
     },
-    reset: () => initialState
+    resetSettings: () => initialState
   }
 })
 
-export const { changeState, reset } = settingsSlice.actions
+export const { changeState, resetSettings } = settingsSlice.actions
 
 export default settingsSlice.reducer
