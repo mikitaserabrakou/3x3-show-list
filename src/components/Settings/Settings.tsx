@@ -43,24 +43,41 @@ export function Settings({ onSaveClick, onResetClick }: ISettingsProps): JSX.Ele
   return (
     <div className={styles.settings}>
       <h1>Settings</h1>
-      <div className={styles.options}>
-        <form onSubmit={onSubmit} onReset={onFormReset}>
-          <h2>Shadow</h2>
-          <div>
-            <input type="checkbox" name="shadow" defaultChecked={shadow.enabled} />
-            <input type="text" name="offsetX" defaultValue={shadow.offsetX} />
-            <input type="text" name="offsetY" defaultValue={shadow.offsetY} />
-            <input type="text" name="blur" defaultValue={shadow.blur} />
-          </div>
-          <div>
-            <h2>Border</h2>
-            <input type="checkbox" name="border" defaultChecked={border.enabled} />
-            <input type="text" name="borderRadius" defaultValue={border.borderRadius} />
-          </div>
-          <input type="submit" value="Save" />
+      <form className={styles.options} onSubmit={onSubmit} onReset={onFormReset}>
+        <span>
+          <label htmlFor="shadow">Shadow</label>
+          <input id="shadow" type="checkbox" name="shadow" defaultChecked={shadow.enabled} />
+        </span>
+        <span>
+          <label htmlFor="offset X">Offset X</label>
+          <input id="offset X" type="text" name="offsetX" defaultValue={shadow.offsetX} />
+        </span>
+        <span>
+          <label htmlFor="offset Y">Offset Y</label>
+          <input id="offset Y" type="text" name="offsetY" defaultValue={shadow.offsetY} />
+        </span>
+        <span>
+          <label htmlFor="blur">Blur</label>
+          <input id="blur" type="text" name="blur" defaultValue={shadow.blur} />
+        </span>
+        <span>
+          <label htmlFor="border">Border</label>
+          <input id="border" type="checkbox" name="border" defaultChecked={border.enabled} />{' '}
+        </span>
+        <span>
+          <label htmlFor="borderRadius">Radiuse</label>
+          <input
+            id="borderRadius"
+            type="text"
+            name="borderRadius"
+            defaultValue={border.borderRadius}
+          />
+        </span>
+        <span className={styles.controls}>
           <input type="reset" />
-        </form>
-      </div>
+          <input type="submit" value="Apply" />
+        </span>
+      </form>
       <div className={styles.buttons}>
         <Button type="cancel" onClick={onResetClick}>
           Reset

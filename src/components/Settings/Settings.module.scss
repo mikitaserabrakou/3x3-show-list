@@ -4,6 +4,7 @@
   align-items: center;
   gap: 0.5rem;
   margin-top: 96px;
+  color: var(--text_color);
   h1 {
     font-size: 1.4rem;
     color: var(--text_color);
@@ -14,8 +15,29 @@
   }
   .options {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 0.5rem;
+    span {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      label {
+        width: 78px;
+      }
+      input {
+        margin-left: 1rem;
+        &[type='checkbox'] {
+          margin-left: 1rem;
+        }
+      }
+    }
+    .controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
   }
   .buttons {
     display: flex;
