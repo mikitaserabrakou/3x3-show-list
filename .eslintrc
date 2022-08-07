@@ -69,6 +69,7 @@
         "endOfLine": "auto"
       }
     ],
-    "no-restricted-exports": "off"
+    "no-restricted-exports": "off",
+    "react/button-has-type": "off"
   }
 }
