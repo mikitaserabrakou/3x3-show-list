@@ -3,16 +3,18 @@ import cn from 'classnames'
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { useDispatch } from 'react-redux'
 
 import Button from 'components/Button'
 import { ICard } from 'types/Show'
 import styles from './Card.module.scss'
+import { removeShow } from '../../store/showSlice'
 
-export function Card({ show, state, id, onRemoveShow }: ICard) {
+export function Card({ show, state, id }: ICard) {
+  const dispatch = useDispatch()
   const { attributes, listeners, transform, transition, setNodeRef } = useSortable({
     id
   })
-
   const style = {
     transform: CSS.Transform.toString(transform),
     transition
@@ -31,7 +33,7 @@ export function Card({ show, state, id, onRemoveShow }: ICard) {
         {!show.imageSrc && <h1 className={styles.title}>{show.title || id} </h1>}
         <div className={styles.body}>
           <h1 className={styles.bodyTitle}>{show.title || id}</h1>
-          <Button variant="remove" onClick={() => onRemoveShow(id)}>
+          <Button variant="remove" onClick={() => dispatch(removeShow(id))}>
             Remove
           </Button>
         </div>
