@@ -16,7 +16,7 @@ export function Settings({ onSaveClick, onResetClick }: ISettingsProps): JSX.Ele
   const { border, shadow } = useSelector((state: RootState) => state.settings)
 
   const dispatch = useDispatch()
-  const onSubmit = (event: any) => {
+  const onSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
     const formData = new FormData(event.target as HTMLFormElement)
     const inputObject = Object.fromEntries(formData)
