@@ -20,6 +20,8 @@ import type { RootState } from 'store/store'
 import { reset, swapShows } from 'store/showSlice'
 import logo from 'assets/images/GitHub-Mark-32px.png'
 import Settings from 'components/Settings'
+import Button from 'components/Button'
+
 import styles from './App.module.scss'
 
 function App(): JSX.Element {
@@ -79,7 +81,19 @@ function App(): JSX.Element {
               </div>
             </SortableContext>
           </DndContext>
+
           <div className={styles.footer}>
+            <div className={styles.buttons}>
+              <Button
+                variant="cancel"
+                onClick={() => {
+                  dispatch(reset)
+                }}
+              >
+                Reset
+              </Button>
+              <Button onClick={handleClickSave}>Save</Button>
+            </div>
             <div className={styles.github}>
               <img src={logo} alt="" />
               <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
@@ -87,14 +101,7 @@ function App(): JSX.Element {
             <a href="https://www.tvmaze.com/api">Data by TVMAZE API</a>
           </div>
         </div>
-        <Settings
-          onSaveClick={() => {
-            handleClickSave()
-          }}
-          onResetClick={() => {
-            dispatch(reset())
-          }}
-        />
+        <Settings />
       </div>
     </div>
   )
