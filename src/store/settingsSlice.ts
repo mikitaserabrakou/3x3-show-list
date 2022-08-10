@@ -13,6 +13,7 @@ export interface SettingsState {
     offsetY: string
     blur: string
   }
+  menuOpen?: boolean
 }
 
 const initialState: SettingsState = {
@@ -26,7 +27,8 @@ const initialState: SettingsState = {
     offsetX: '0',
     offsetY: '0.43',
     blur: '0.625'
-  }
+  },
+  menuOpen: false
 }
 
 export const settingsSlice = createSlice({
@@ -37,10 +39,16 @@ export const settingsSlice = createSlice({
       state.border = action.payload.border
       state.shadow = action.payload.shadow
     },
-    resetSettings: () => initialState
+    resetSettings: state => {
+      state.border = initialState.border
+      state.shadow = initialState.shadow
+    },
+    toggleMenu: state => {
+      state.menuOpen = !state.menuOpen
+    }
   }
 })
 
-export const { changeState, resetSettings } = settingsSlice.actions
+export const { changeState, resetSettings, toggleMenu } = settingsSlice.actions
 
 export default settingsSlice.reducer
