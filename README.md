@@ -1,8 +1,8 @@
-# 3x3-show-list
+# [3x3-show-list](https://3x3showlist.netlify.app)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fa062f7e-7ccd-423a-8539-2057960dbe73/deploy-status)](https://3x3showlist.netlify.app)
 
 React website to create a 3x3 grid list of tv-shows and save as image.
-
-[DEMO](https://3x3showlist.netlify.app/)
 
 ## Built with
 
