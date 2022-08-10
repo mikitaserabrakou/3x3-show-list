@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useRef, useCallback } from 'react'
 
 import {
   DndContext,
@@ -50,9 +50,9 @@ function App(): JSX.Element {
     }
     toJpeg(ref.current, {
       cacheBust: true,
-      quality: 0.8,
-      backgroundColor: window.localStorage.getItem('theme') === 'dark-theme' ? '#292d3e' : '#fff',
-      pixelRatio: 1
+      quality: 1,
+      pixelRatio: 1,
+      backgroundColor: window.localStorage.getItem('theme') === 'dark-theme' ? '#292d3e' : '#fff'
     }).then(dataUrl => {
       const link = document.createElement('a')
       link.download = '3x3-show-list.png'
