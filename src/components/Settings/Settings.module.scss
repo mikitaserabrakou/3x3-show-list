@@ -1,18 +1,28 @@
+.menu {
+  display: none;
+}
+.rightPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .settings {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 96px;
   color: var(--text_color);
+  margin-top: 96px;
   h1 {
     font-size: 1.4rem;
     color: var(--text_color);
   }
+
   h2 {
     font-size: 1rem;
     color: var(--text_color);
   }
+
   .options {
     display: flex;
     flex-direction: column;
@@ -21,17 +31,20 @@
     span {
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
       label {
         width: 78px;
       }
+
       input {
         margin-left: 1rem;
+        width: 72px;
         &[type='checkbox'] {
           margin-left: 1rem;
+          width: auto;
         }
       }
     }
+
     .controls {
       padding-top: 1rem;
       display: flex;
@@ -41,11 +54,35 @@
       gap: 1rem;
     }
   }
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+}
+
+@media screen and (max-width: 730px) {
+  .settings {
+    display: none;
+  }
+
+  .rightPanel {
+    width: 0;
+  }
+
+  .rightPanelOpen {
+    .menu {
+      display: flex;
+      z-index: 10;
+    }
+    position: fixed;
+    right: 0;
+    height: 100%;
+    background-color: var(--bgcolor);
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
+    width: 240px;
+    z-index: 100;
+    padding-top: 1rem;
+    transition: width 0.3s ease;
+
+    .settings {
+      display: flex;
+      margin: 0;
+    }
   }
 }

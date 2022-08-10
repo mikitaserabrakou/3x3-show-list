@@ -49,3 +49,10 @@ body {
 .btn {
   font-family: $font-stack;
 }
+
+button {
+  cursor: pointer;
+  background-color: var(--bgcolor);
+  color: var(--text_color);
+  border: none;
+}
