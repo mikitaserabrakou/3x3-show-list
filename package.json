@@ -32,13 +32,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "sv": "vite",
-    "svb": "vite build",
-    "svr": "vite preview",
-    "start": "react-scripts start",
-    "build": "CI='' react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "vite",
+    "preview": "vite preview",
+    "build": "vite build",
     "lint": "eslint --ext .tsx,.tsx src",
     "lint:fix": "eslint --ext .tsx,.ts --fix src"
   },
