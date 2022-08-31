@@ -61,6 +61,7 @@ function App(): JSX.Element {
     })
   }, [ref])
 
+  const handleReset = () => dispatch(reset())
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -84,12 +85,7 @@ function App(): JSX.Element {
 
           <div className={styles.footer}>
             <div className={styles.buttons}>
-              <Button
-                variant="cancel"
-                onClick={() => {
-                  dispatch(reset)
-                }}
-              >
+              <Button variant="cancel" onClick={handleReset}>
                 Reset
               </Button>
               <Button onClick={handleClickSave}>Save</Button>
