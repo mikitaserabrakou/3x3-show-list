@@ -90,11 +90,13 @@ function App(): JSX.Element {
               </Button>
               <Button onClick={handleClickSave}>Save</Button>
             </div>
-            <div className={styles.github}>
-              <img src={logo} alt="" />
-              <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
+            <div className={styles.links}>
+              <div className={styles.github}>
+                <img src={logo} alt="" />
+                <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
+              </div>
+              <a href="https://www.tvmaze.com/api">Data by TVMAZE API</a>
             </div>
-            <a href="https://www.tvmaze.com/api">Data by TVMAZE API</a>
           </div>
         </div>
         <Settings />
