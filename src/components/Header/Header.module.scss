@@ -5,7 +5,7 @@
   align-self: center;
   max-width: 574px;
   width: 100%;
-  padding: 0.5rem 1rem 0.5rem 1rem;
+  padding: 1rem;
   color: var(--text_color);
   .logo {
     font-size: 1.5rem;
@@ -25,5 +25,8 @@
 @media screen and (max-width: 730px) {
   .menu {
     display: flex;
+  }
+  .header {
+    padding: 0.5rem 1rem 0.5rem 1rem;
   }
 }
