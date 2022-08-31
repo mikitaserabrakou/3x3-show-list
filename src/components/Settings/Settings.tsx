@@ -38,7 +38,12 @@ export function Settings(): JSX.Element {
 
   return (
     <div className={cn(styles.rightPanel, { [styles.rightPanelOpen]: menuOpen })}>
-      <button type="button" className={styles.menu} onClick={() => dispatch(toggleMenu())}>
+      <button
+        type="button"
+        className={styles.menu}
+        onClick={() => dispatch(toggleMenu())}
+        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="36"

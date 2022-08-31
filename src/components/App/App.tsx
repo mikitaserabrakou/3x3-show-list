@@ -61,6 +61,7 @@ function App(): JSX.Element {
     })
   }, [ref])
 
+  const handleReset = () => dispatch(reset())
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -84,21 +85,18 @@ function App(): JSX.Element {
 
           <div className={styles.footer}>
             <div className={styles.buttons}>
-              <Button
-                variant="cancel"
-                onClick={() => {
-                  dispatch(reset)
-                }}
-              >
+              <Button variant="cancel" onClick={handleReset}>
                 Reset
               </Button>
               <Button onClick={handleClickSave}>Save</Button>
             </div>
-            <div className={styles.github}>
-              <img src={logo} alt="" />
-              <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
+            <div className={styles.links}>
+              <div className={styles.github}>
+                <img src={logo} alt="" />
+                <a href="https://github.com/mikitaserabrakou/3x3-show-list">Github</a>
+              </div>
+              <a href="https://www.tvmaze.com/api">Data by TVMAZE API</a>
             </div>
-            <a href="https://www.tvmaze.com/api">Data by TVMAZE API</a>
           </div>
         </div>
         <Settings />

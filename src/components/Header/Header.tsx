@@ -1,13 +1,15 @@
 import React from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import ThemeToggle from 'components/ThemeToggle'
 import { toggleMenu } from 'store/settingsSlice'
 
 import styles from './Header.module.scss'
+import { RootState } from 'store/store'
 
 export function Header(): JSX.Element {
+  const { menuOpen } = useSelector((state: RootState) => state.settings)
   const dispatch = useDispatch()
 
   return (
@@ -15,7 +17,11 @@ export function Header(): JSX.Element {
       <div className={styles.logo}>3x3</div>
       <div>
         <ThemeToggle />
-        <button className={styles.menu} onClick={() => dispatch(toggleMenu())}>
+        <button
+          className={styles.menu}
+          onClick={() => dispatch(toggleMenu())}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="36"
