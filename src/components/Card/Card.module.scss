@@ -63,7 +63,9 @@
     transition: 0.5s;
     text-align: center;
     margin-bottom: 1rem;
-
+    button {
+      padding: 0.5rem 0.8rem;
+    }
     &Title {
       padding: 2em 0.5em 0 0.5em;
       color: #ffffff;
