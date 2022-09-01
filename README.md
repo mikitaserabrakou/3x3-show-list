@@ -8,6 +8,7 @@ React website to create a 3x3 grid list of tv-shows and save as image.
 
 - [Create React App](https://github.com/facebook/create-react-app#readme)
 - [Typescript](https://github.com/microsoft/TypeScript/#readme)
+- [Vite](https://github.com/vitejs/vite#readme)
 - [Axios](https://github.com/axios/axios#readme)
 - [dnd-kit](https://github.com/clauderic/dnd-kit#readme)
 - [html-to-image](https://github.com/bubkoo/html-to-image#readme)
@@ -36,7 +37,7 @@ React website to create a 3x3 grid list of tv-shows and save as image.
 
    `npm start`
 
-4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
 ## Contribution
 
