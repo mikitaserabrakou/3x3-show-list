@@ -23,6 +23,9 @@ export function SearchBox() {
         onBlur={setIsFocused}
         placeholder="Enter tv-show name"
       />
+      <div>
+        <button>x</button>
+      </div>
       {data && isFocused ? <SearchResults data={data} setIsFocused={setIsFocused} /> : null}
     </div>
   )

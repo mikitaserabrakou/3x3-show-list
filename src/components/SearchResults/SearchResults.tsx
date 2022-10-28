@@ -13,7 +13,7 @@ type SearchResultsProps = {
 }
 
 const handleMouseDown = (event: SyntheticEvent) => {
-  event.stopPropagation()
+  // event.stopPropagation()
   event.preventDefault()
 }
 
