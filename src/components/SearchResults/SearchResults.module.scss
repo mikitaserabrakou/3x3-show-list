@@ -1,13 +1,14 @@
 .results {
   position: absolute;
-  top: 5.5rem;
+  top: 110px;
   max-width: 542px;
   width: 93%;
   list-style-type: none;
   padding: 0;
   margin: 0;
   background: var(--darker_bgcolor);
-  border-radius: 0.4rem;
+  border-radius: 0.12em;
+  border: 1px solid var(--btn_border);
   z-index: 10;
   box-shadow: 0.2rem 0.8rem 1.6rem #1a1d29;
   font-size: 1rem;

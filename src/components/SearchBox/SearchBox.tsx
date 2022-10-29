@@ -14,16 +14,19 @@ export function SearchBox() {
   }
 
   return (
-    <div className={styles.search_box}>
-      <input
-        type="text"
-        className={styles.search_bar}
-        onChange={handleChange}
-        onFocus={setIsFocused}
-        onBlur={setIsFocused}
-        placeholder="Enter tv-show name"
-      />
+    <form className={styles.search}>
+      <div className={styles.search_box}>
+        <input
+          type="text"
+          className={styles.search_bar}
+          onChange={handleChange}
+          onFocus={setIsFocused}
+          onBlur={setIsFocused}
+          placeholder="Enter tv-show name"
+        />
+        <button type="reset">X</button>
+      </div>
       {data && isFocused ? <SearchResults data={data} setIsFocused={setIsFocused} /> : null}
-    </div>
+    </form>
   )
 }
