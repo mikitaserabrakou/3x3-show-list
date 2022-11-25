@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React, { SyntheticEvent, useState } from 'react'
 
 import useAxios from 'utils/useAxios'
 import useToggle from 'utils/useToggle'
@@ -13,11 +13,15 @@ export function SearchBox() {
     fetch(`https://api.tvmaze.com/search/shows?q=${event.currentTarget.value}`)
   }
 
+  const showData = () => {
+    return data != '' && isFocused
+  }
+
   return (
     <form className={styles.search}>
       <div className={styles.search_box}>
         <input
-          type="text"
+          type="search"
           className={styles.search_bar}
           onChange={handleChange}
           onFocus={setIsFocused}
@@ -26,7 +30,7 @@ export function SearchBox() {
         />
         <button type="reset">X</button>
       </div>
-      {data && isFocused ? <SearchResults data={data} setIsFocused={setIsFocused} /> : null}
+      <SearchResults data={data} setIsFocused={setIsFocused} visible={showData()} />
     </form>
   )
 }

@@ -10,6 +10,7 @@ import { addShow } from '../../store/showSlice'
 type SearchResultsProps = {
   data: IShow[]
   setIsFocused: () => void
+  visible: boolean
 }
 
 const handleMouseDown = (event: SyntheticEvent) => {
@@ -17,7 +18,7 @@ const handleMouseDown = (event: SyntheticEvent) => {
   event.preventDefault()
 }
 
-export function SearchResults({ data, setIsFocused }: SearchResultsProps): JSX.Element {
+export function SearchResults({ data, setIsFocused, visible }: SearchResultsProps): JSX.Element {
   const dispatch = useDispatch()
 
   const [bg, text] =
@@ -25,7 +26,12 @@ export function SearchResults({ data, setIsFocused }: SearchResultsProps): JSX.E
       ? ['292d3e', 'ffffff']
       : ['ffffff', '292d3e']
   return (
-    <ul className={styles.results} onFocus={setIsFocused} onBlur={setIsFocused}>
+    <ul
+      className={styles.results}
+      onFocus={setIsFocused}
+      onBlur={setIsFocused}
+      data-visible={visible}
+    >
       {data.map((item: any) => (
         <li key={item.show.id} onMouseDown={handleMouseDown}>
           <img
